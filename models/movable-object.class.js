@@ -9,6 +9,7 @@ class MovableObject {
   speedY = 0;
   accerleration = 1;
   otherDirection = false;
+  energy = 100;
 
   applyGravity() {
     setInterval(() => {
@@ -54,6 +55,14 @@ class MovableObject {
     }
 
   }
+
+  isColliding(obj) {
+    return  this.x + this.width > obj.x &&
+    this.y + this.height > obj.y &&
+    this.x < obj.x &&
+    this.y < obj.y + obj.height
+            
+}
 
   playAnimation(images) {
     let i = this.currentImage % this.IMAGES_WALKING.length; //let i = 0 % 6; 0, Rest 0 // i = 0, 1, 2, 3, 4, 5, 0
