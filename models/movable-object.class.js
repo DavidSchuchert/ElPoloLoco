@@ -64,6 +64,18 @@ class MovableObject {
             
 }
 
+hit(){
+  this.energy -= 33;
+
+  if(this.energy <= 0){
+    this.energy = 0;
+  }
+}
+
+isDead(){
+  return this.energy == 0
+}
+
   playAnimation(images) {
     let i = this.currentImage % this.IMAGES_WALKING.length; //let i = 0 % 6; 0, Rest 0 // i = 0, 1, 2, 3, 4, 5, 0
     let path = images[i];
