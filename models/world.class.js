@@ -26,7 +26,7 @@ class World {
           this.character.hit();
         }
       });
-    }, 1000);
+    }, 100);
   }
 
   draw() {
