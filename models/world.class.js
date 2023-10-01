@@ -6,8 +6,10 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new STATUSBAR;
+  salsaBar = new SALSABAR;
   throwableObjects = [];
   bottlesInInventory = 0;
+  collect_bottle_sound = new Audio("audio/collectBottle.mp3");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -41,6 +43,8 @@ this.checkThrowObjects();
       if (this.character.isColliding(bottle) ) {
         this.bottlesInInventory++;
         this.level.bottles.splice(index, 1);
+        this.salsaBar.setPercentage(this.bottlesInInventory * 20);
+        this.collect_bottle_sound.play();
       }
     });
 
@@ -51,6 +55,7 @@ this.checkThrowObjects();
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle);
       this.bottlesInInventory--;
+      this.salsaBar.setPercentage(this.bottlesInInventory * 20);
     }
   }
 
@@ -63,6 +68,7 @@ this.checkThrowObjects();
     this.ctx.translate(-this.camera_x, 0);
     ///----SPACE FOR FIXED OBJECTS!----
     this.addToMap(this.statusBar);
+    this.addToMap(this.salsaBar);
     this.ctx.translate(this.camera_x, 0);
 
  
