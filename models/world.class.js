@@ -7,6 +7,7 @@ class World {
   camera_x = 0;
   statusBar = new STATUSBAR;
   throwableObjects = [];
+  bottlesInInventory = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -31,24 +32,25 @@ this.checkThrowObjects();
     /* check for collision with enemy */
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) ) {
-        console.log('Collision with Character, Energy ', this.character.energy);
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
     });
 /* Check for Collision with bottle */
-    this.level.bottles.forEach((bottle) => {
+    this.level.bottles.forEach((bottle, index) => {
       if (this.character.isColliding(bottle) ) {
-        console.log('Collision with bottle');
+        this.bottlesInInventory++;
+        this.level.bottles.splice(index, 1);
       }
     });
 
   }
 
   checkThrowObjects(){
-    if(this.keyboard.D){
+    if(this.keyboard.D && this.bottlesInInventory >= 1){
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle);
+      this.bottlesInInventory--;
     }
   }
 
