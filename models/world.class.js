@@ -36,8 +36,18 @@ this.checkThrowObjects();
 
   checkCollisions(){
     /* check for collision with enemy */
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) ) {
+    this.level.enemies.forEach((enemy, index) => {
+      if(this.character.isColliding(enemy) && this.character.speedY <=-10){
+        console.log("enemy Killed");
+        enemy.hit();
+        setTimeout(() => {
+        let enemyIndex = this.level.enemies.indexOf(enemy);
+          if (enemyIndex !== -1) {
+              this.level.enemies.splice(enemyIndex, 1);
+          }
+      }, 500);
+      }
+      if (this.character.isColliding(enemy) && enemy.isHit == false ) {
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
