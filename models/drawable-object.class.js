@@ -25,7 +25,7 @@ class DRAWABLE_OBJECT {
   }
   
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken || this instanceof Bottles) {
+    if (this instanceof Character || this instanceof Chicken || this instanceof Bottles || this instanceof Coins) {
       ctx.beginPath();
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";

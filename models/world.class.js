@@ -7,9 +7,13 @@ class World {
   camera_x = 0;
   statusBar = new STATUSBAR;
   salsaBar = new SALSABAR;
+  coinBar = new COINBAR;
   throwableObjects = [];
   bottlesInInventory = 0;
+  CoinsInInventory = 0;
   collect_bottle_sound = new Audio("audio/collectBottle.mp3");
+  collect_coin_sound = new Audio("audio/collect_coin.mp3");
+
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -47,6 +51,15 @@ this.checkThrowObjects();
         this.collect_bottle_sound.play();
       }
     });
+/* check for collision with Coin */
+this.level.coins.forEach((coin, index) => {
+  if (this.character.isColliding(coin) ) {
+    this.CoinsInInventory++;
+    this.level.coins.splice(index, 1);
+    this.coinBar.setPercentage(this.CoinsInInventory * 20);
+    this.collect_coin_sound.play();
+  }
+});
 
   }
 
@@ -69,6 +82,7 @@ this.checkThrowObjects();
     ///----SPACE FOR FIXED OBJECTS!----
     this.addToMap(this.statusBar);
     this.addToMap(this.salsaBar);
+    this.addToMap(this.coinBar);
     this.ctx.translate(this.camera_x, 0);
 
  
@@ -76,6 +90,7 @@ this.checkThrowObjects();
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.throwableObjects);
     
 
