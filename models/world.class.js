@@ -28,6 +28,7 @@ this.checkThrowObjects();
   }
 
   checkCollisions(){
+    /* check for collision with enemy */
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) ) {
         console.log('Collision with Character, Energy ', this.character.energy);
@@ -35,6 +36,13 @@ this.checkThrowObjects();
         this.statusBar.setPercentage(this.character.energy);
       }
     });
+/* Check for Collision with bottle */
+    this.level.bottles.forEach((bottle) => {
+      if (this.character.isColliding(bottle) ) {
+        console.log('Collision with bottle');
+      }
+    });
+
   }
 
   checkThrowObjects(){
@@ -59,7 +67,9 @@ this.checkThrowObjects();
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.throwableObjects);
+    
 
     this.ctx.translate(-this.camera_x, 0);
 
