@@ -11,6 +11,7 @@ body {
     color: #ffda18;
     text-shadow: 3px 5px 0px rgba(0, 0, 0, 0.278);
     text-decoration: underline;
+    margin: 0px;
 }
 
 .game {
@@ -90,10 +91,43 @@ body {
 .unmute_button img{
    height: 35px; 
 }
+/* Smartphone */
+@media only screen and (max-width: 760px){
+    .game{
+        width: 100%;
+    }
+    .startscreen img{
+        width: 100%;
+        height: auto;
+    }
+    .endscreen img{
+        width: 100%;
+        height: auto;
+    }
+    h1{
+        display:none;
+    }
+    .mute_button{
+        display:none;
+    }
+}
 
-.fullscreen{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+@media only screen and (max-height: 480px){
+    .game{
+        height: 100vh;
+    }
+    .startscreen img{
+        height: 100vh;
+        width: auto;
+    }
+    .endscreen img{
+        height: 100vh;
+        width: auto;
+    }
+    h1{
+        display:none;
+    }
+    .mute_button{
+        display:none;
+    }
 }
