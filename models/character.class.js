@@ -59,7 +59,12 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
+        if (!world.StopSounds){
         this.walking_sound.play();
+        }
+        else{
+          this.walking_sound.pause();
+        }
       }
 
       if (this.world.keyboard.LEFT && this.x > 0) {
@@ -69,7 +74,12 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
-        this.jump_sound.play();
+        if (!world.StopSounds){
+                  this.jump_sound.play();
+        } else{
+          this.jump_sound.pause();
+        }
+
       }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
@@ -77,8 +87,6 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
-        document.getElementById("endscreen").style.display = "block";
-        document.getElementById("canvas").style.display = "none";
       } else if(this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {

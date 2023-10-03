@@ -47,9 +47,46 @@ body {
     display:none;
     background-image: url('img/5_background/first_half_background.png');
     border-radius: 16px;
+    height: 480px;
+    width: 720px;
 }
 
 .endscreen img {
     border-radius: 16px;
     box-shadow: 3px 5px 0px rgba(0, 0, 0, 0.278);
+}
+.mute_button{
+    display:block;
+}
+.mute_button button{
+    border-radius: 16px;
+    background-color: #d8d900;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.mute_button img{
+   height: 35px; 
+}
+
+.unmute_button{
+    display:none;
+}
+.unmute_button button{
+    border-radius: 16px;
+    background-color: #d8d900;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.unmute_button img{
+   height: 35px; 
 }

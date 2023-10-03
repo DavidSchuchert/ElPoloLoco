@@ -2,16 +2,29 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let startButton = document.getElementById("startbutton");
-bg_music = new Audio("audio/bg_music.mp3");
+
 
 function init() {
   document.getElementById("startscreen").style.display = 'none';
   document.getElementById("canvas").style.display = 'block';
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
-  bg_music.play();
+
 
   console.log("My Character is", world.character);
+}
+function muteAllSounds(){
+  world.StopSounds = true;
+  world.bg_music.pause()
+  document.getElementById("unmutebutton").style.display = "block";
+  document.getElementById("mutebutton").style.display = "none";
+}
+
+function unmuteAllSounds(){
+  world.StopSounds = false;
+  world.bg_music.play()
+  document.getElementById("unmutebutton").style.display = "none";
+  document.getElementById("mutebutton").style.display = "block";
 }
 
 document.addEventListener("keydown", (e) => {
@@ -63,3 +76,4 @@ document.addEventListener("keyup", (e) => {
 
   console.log(e);
 });
+

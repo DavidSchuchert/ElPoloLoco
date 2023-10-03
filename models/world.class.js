@@ -8,11 +8,14 @@ class World {
   statusBar = new STATUSBAR;
   salsaBar = new SALSABAR;
   coinBar = new COINBAR;
+  bossHealthBar = new BOSSHEALTHBAR;
   throwableObjects = [];
   bottlesInInventory = 0;
   CoinsInInventory = 0;
   collect_bottle_sound = new Audio("audio/collectBottle.mp3");
   collect_coin_sound = new Audio("audio/collect_coin.mp3");
+  bg_music = new Audio("audio/bg_music.mp3");
+  StopSounds = false;
 
 
   constructor(canvas, keyboard) {
@@ -32,8 +35,15 @@ class World {
 this.checkCollisions();
 this.checkThrowObjects();
     }, 100);
+    if (!this.StopSounds){
+      this.bg_music.play();
+    } else {
+      this.bg_music.pause();
+    }
+
   }
 
+  
   checkCollisions(){
     /* check for collision with enemy */
     this.level.enemies.forEach((enemy, index) => {
@@ -51,6 +61,9 @@ this.checkThrowObjects();
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
+      if(this.character.energy == 0){
+        this.GameEnds();
+      }
     });
 
     /* Check for Collision from Bottle with Endboss */
@@ -59,6 +72,10 @@ this.checkThrowObjects();
           if (boss.isColliding(throwableBottle)) {
               console.log("hit Boss");
               boss.bossGotHit();
+              this.bossHealthBar.setPercentage(boss.BossHealth);
+          }
+          if(boss.bossIsDead){
+            this.GameEnds();
           }
       });
   });
@@ -69,7 +86,11 @@ this.checkThrowObjects();
         this.bottlesInInventory++;
         this.level.bottles.splice(index, 1);
         this.salsaBar.setPercentage(this.bottlesInInventory * 20);
-        this.collect_bottle_sound.play();
+        if (!this.StopSounds){
+        this.collect_bottle_sound.play()}
+        else{
+          this.collect_bottle_sound.pause()
+        }
       }
     });
 /* check for collision with Coin */
@@ -78,7 +99,11 @@ this.level.coins.forEach((coin, index) => {
     this.CoinsInInventory++;
     this.level.coins.splice(index, 1);
     this.coinBar.setPercentage(this.CoinsInInventory * 20);
-    this.collect_coin_sound.play();
+    if (!this.StopSounds){
+    this.collect_coin_sound.play()}
+    else{
+      this.collect_coin_sound.pause()}
+    
   }
 });
 
@@ -104,6 +129,7 @@ this.level.coins.forEach((coin, index) => {
     this.addToMap(this.statusBar);
     this.addToMap(this.salsaBar);
     this.addToMap(this.coinBar);
+  
     this.ctx.translate(this.camera_x, 0);
 
  
@@ -112,6 +138,7 @@ this.level.coins.forEach((coin, index) => {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.endboss);
     this.addObjectsToMap(this.level.bottles);
+    this.addToMap(this.bossHealthBar);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.throwableObjects);
     
@@ -154,4 +181,14 @@ this.level.coins.forEach((coin, index) => {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
+
+  GameEnds(){
+    setTimeout(() => {
+      document.getElementById("canvas").style.display = "none";
+      document.getElementById("endscreen").style.display = "block";
+    }, 1000);
+    this.bg_music.pause();
+  }
+
+
 }
