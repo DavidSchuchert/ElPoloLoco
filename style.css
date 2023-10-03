@@ -90,3 +90,10 @@ body {
 .unmute_button img{
    height: 35px; 
 }
+
+.fullscreen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

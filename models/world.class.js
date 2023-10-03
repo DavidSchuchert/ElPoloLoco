@@ -15,6 +15,7 @@ class World {
   collect_bottle_sound = new Audio("audio/collectBottle.mp3");
   collect_coin_sound = new Audio("audio/collect_coin.mp3");
   bg_music = new Audio("audio/bg_music.mp3");
+  bottle_smash_sound = new Audio("audio/bottlesmash.mp3");
   StopSounds = false;
 
 
@@ -43,7 +44,7 @@ this.checkThrowObjects();
 
   }
 
-  
+
   checkCollisions(){
     /* check for collision with enemy */
     this.level.enemies.forEach((enemy, index) => {
@@ -73,6 +74,13 @@ this.checkThrowObjects();
               console.log("hit Boss");
               boss.bossGotHit();
               this.bossHealthBar.setPercentage(boss.BossHealth);
+              if(!this.StopSounds){
+                this.bottle_smash_sound.play();
+              } else{
+                this.bottle_smash_sound.pause();
+              }
+              
+              this.throwableObjects.splice(index, 1);
           }
           if(boss.bossIsDead){
             this.GameEnds();
