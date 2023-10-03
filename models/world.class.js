@@ -52,6 +52,16 @@ this.checkThrowObjects();
         this.statusBar.setPercentage(this.character.energy);
       }
     });
+
+    /* Check for Collision from Bottle with Endboss */
+    this.throwableObjects.forEach((throwableBottle, index) => {
+      this.level.endboss.forEach(boss => {
+          if (boss.isColliding(throwableBottle)) {
+              console.log("hit Boss");
+          }
+      });
+  });
+
 /* Check for Collision with bottle */
     this.level.bottles.forEach((bottle, index) => {
       if (this.character.isColliding(bottle) ) {
@@ -99,6 +109,7 @@ this.level.coins.forEach((coin, index) => {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.endboss);
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.throwableObjects);
