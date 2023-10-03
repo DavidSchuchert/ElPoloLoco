@@ -58,6 +58,7 @@ this.checkThrowObjects();
       this.level.endboss.forEach(boss => {
           if (boss.isColliding(throwableBottle)) {
               console.log("hit Boss");
+              boss.bossGotHit();
           }
       });
   });
