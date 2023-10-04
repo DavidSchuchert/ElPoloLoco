@@ -9,6 +9,7 @@ function init() {
   document.getElementById("canvas").style.display = 'block';
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+  addTouch();
 
 
   console.log("My Character is", world.character);
@@ -25,6 +26,41 @@ function unmuteAllSounds(){
   world.bg_music.play()
   document.getElementById("unmutebutton").style.display = "none";
   document.getElementById("mutebutton").style.display = "block";
+}
+
+function addTouch() {
+  document.getElementById('btnLeft').addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      keyboard.LEFT = true;
+  });
+  document.getElementById('btnLeft').addEventListener('touchend', (event) => {
+      event.preventDefault();
+      keyboard.LEFT = false;
+  });
+  document.getElementById('btnJump').addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      keyboard.SPACE = true;
+  });
+  document.getElementById('btnJump').addEventListener('touchend', (event) => {
+      event.preventDefault();
+      keyboard.SPACE = false;
+  });
+  document.getElementById('btnRight').addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      keyboard.RIGHT = true;
+  });
+  document.getElementById('btnRight').addEventListener('touchend', (event) => {
+      event.preventDefault();
+      keyboard.RIGHT = false;
+  });
+  document.getElementById('btnThrow').addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      keyboard.D = true;
+  });
+  document.getElementById('btnThrow').addEventListener('touchend', (event) => {
+      event.preventDefault();
+      keyboard.D = false;
+  });
 }
 
 document.addEventListener("keydown", (e) => {

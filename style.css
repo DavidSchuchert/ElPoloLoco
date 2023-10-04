@@ -12,6 +12,7 @@ body {
     text-shadow: 3px 5px 0px rgba(0, 0, 0, 0.278);
     text-decoration: underline;
     margin: 0px;
+    justify-content: center;
 }
 
 .game {
@@ -22,7 +23,8 @@ body {
 }
 
 .startscreen {
-    display:block;
+    display: flex;
+    position: relative;
 }
 
 .startscreen img {
@@ -91,6 +93,45 @@ body {
 .unmute_button img{
    height: 35px; 
 }
+
+.buttons_left{
+    position: absolute;
+    top: 92%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    display: none;
+    gap: 16px;
+}
+.buttons_right{
+    position: absolute;
+    top: 92%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    display: none;
+    gap: 16px;
+}
+
+.Hud_Game{
+    position: relative;
+}
+
+.Hud_Game button{
+    background-color: transparent;
+    height: 46px;
+    width: 46px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+}
+
+.Hud_Game button img{
+    height: 46px;
+    width: 46px;
+}
 /* Smartphone */
 @media only screen and (max-width: 760px){
     .game{
@@ -109,6 +150,12 @@ body {
     }
     .mute_button{
         display:none;
+    }
+    .buttons_left{
+        display:flex;
+    }
+    .buttons_right{
+        display:flex;
     }
 }
 
@@ -129,5 +176,11 @@ body {
     }
     .mute_button{
         display:none;
+    }
+    .buttons_left{
+        display:flex;
+    }
+    .buttons_right{
+        display:flex;
     }
 }
