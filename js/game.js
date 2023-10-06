@@ -1,26 +1,52 @@
+/**
+ * Reference to the game's canvas element.
+ * @type {HTMLCanvasElement}
+ */
 let canvas;
+
+/**
+ * Reference to the game's world object.
+ * @type {Object}
+ */
 let world;
+
+/**
+ * Keyboard instance for tracking key states.
+ * @type {Keyboard}
+ */
 let keyboard = new Keyboard();
+
+/**
+ * Reference to the game's start button element.
+ * @type {HTMLElement}
+ */
 let startButton = document.getElementById("startbutton");
 
 
+
+/**
+ * Initializes the game by hiding the start screen and displaying the game canvas.
+ */
 function init() {
   document.getElementById("startscreen").style.display = 'none';
   document.getElementById("Hud_Game").style.display = 'block';
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   addTouch();
-
-
-  console.log("My Character is", world.character);
 }
+
+/**
+ * Mutes all game sounds and displays the unmute button.
+ */
 function muteAllSounds(){
   world.StopSounds = true;
   world.bg_music.pause()
   document.getElementById("unmutebutton").style.display = "block";
   document.getElementById("mutebutton").style.display = "none";
 }
-
+/**
+ * Unmutes all game sounds and displays the mute button.
+ */
 function unmuteAllSounds(){
   world.StopSounds = false;
   world.bg_music.play()
@@ -28,6 +54,7 @@ function unmuteAllSounds(){
   document.getElementById("mutebutton").style.display = "block";
 }
 
+/** Thats the implementation of our Touch Controls for Smartphones */
 function addTouch() {
   document.getElementById('btnLeft').addEventListener('touchstart', (event) => {
       event.preventDefault();
@@ -63,6 +90,13 @@ function addTouch() {
   });
 }
 
+/**
+ * Event listener for keyboard keydown events.
+ * Sets the appropriate keyboard state based on the pressed key.
+ *
+ * @param {KeyboardEvent} e - The keydown event.
+ */
+
 document.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
     keyboard.RIGHT = true;
@@ -87,6 +121,13 @@ document.addEventListener("keydown", (e) => {
 
   console.log(e);
 });
+
+/**
+ * Event listener for keyboard keyup events.
+ * Resets the appropriate keyboard state based on the released key.
+ *
+ * @param {KeyboardEvent} e - The keyup event.
+ */
 
 document.addEventListener("keyup", (e) => {
   if (e.keyCode == 39) {
@@ -113,34 +154,6 @@ document.addEventListener("keyup", (e) => {
   console.log(e);
 });
 
-
-function fullscreen(){
-  let fullscreen = document.getElementById('fullscreen');
-  enterFullscreen(fullscreen);
-}
-
-function exitfullscreen(){
-  let fullscreen = document.getElementById('fullscreen');
-  exitFullscreen(fullscreen);
-}
-
-function enterFullscreen(element) {
-  if(element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-    element.msRequestFullscreen();
-  } else if(element.webkitRequestFullscreen) {  // iOS Safari
-    element.webkitRequestFullscreen();
-  }
-}
-
-function exitFullscreen() {
-  if(document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if(document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  }
-}
 
 
 

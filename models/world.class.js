@@ -26,6 +26,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.collisionManager = new CollisionManager(this);
   }
   setWorld() {
     this.character.world = this;
@@ -33,8 +34,8 @@ class World {
 
   run() {
     setInterval(() => {
-this.checkCollisions();
-this.checkThrowObjects();
+      this.collisionManager.checkCollisions();
+      this.collisionManager.checkThrowObjects();
     }, 100);
     if (!this.StopSounds){
       this.bg_music.play();
@@ -42,88 +43,6 @@ this.checkThrowObjects();
       this.bg_music.pause();
     }
 
-  }
-
-
-  checkCollisions(){
-    /* check for collision with enemy */
-    this.level.enemies.forEach((enemy, index) => {
-      if(this.character.isColliding(enemy) && this.character.speedY <=-10){
-        console.log("enemy Killed");
-        enemy.hit();
-        setTimeout(() => {
-        let enemyIndex = this.level.enemies.indexOf(enemy);
-          if (enemyIndex !== -1) {
-              this.level.enemies.splice(enemyIndex, 1);
-          }
-      }, 500);
-      }
-      if (this.character.isColliding(enemy) && enemy.isHit == false ) {
-        this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-      }
-      if(this.character.energy == 0){
-        this.GameEnds();
-      }
-    });
-
-    /* Check for Collision from Bottle with Endboss */
-    this.throwableObjects.forEach((throwableBottle, index) => {
-      this.level.endboss.forEach(boss => {
-          if (boss.isColliding(throwableBottle)) {
-              console.log("hit Boss");
-              boss.bossGotHit();
-              this.bossHealthBar.setPercentage(boss.BossHealth);
-              if(!this.StopSounds){
-                this.bottle_smash_sound.play();
-              } else{
-                this.bottle_smash_sound.pause();
-              }
-              
-              this.throwableObjects.splice(index, 1);
-          }
-          if(boss.bossIsDead){
-            this.GameEnds();
-          }
-      });
-  });
-
-/* Check for Collision with bottle */
-    this.level.bottles.forEach((bottle, index) => {
-      if (this.character.isColliding(bottle) ) {
-        this.bottlesInInventory++;
-        this.level.bottles.splice(index, 1);
-        this.salsaBar.setPercentage(this.bottlesInInventory * 20);
-        if (!this.StopSounds){
-        this.collect_bottle_sound.play()}
-        else{
-          this.collect_bottle_sound.pause()
-        }
-      }
-    });
-/* check for collision with Coin */
-this.level.coins.forEach((coin, index) => {
-  if (this.character.isColliding(coin) ) {
-    this.CoinsInInventory++;
-    this.level.coins.splice(index, 1);
-    this.coinBar.setPercentage(this.CoinsInInventory * 20);
-    if (!this.StopSounds){
-    this.collect_coin_sound.play()}
-    else{
-      this.collect_coin_sound.pause()}
-    
-  }
-});
-
-  }
-
-  checkThrowObjects(){
-    if(this.keyboard.D && this.bottlesInInventory >= 1){
-      let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-      this.throwableObjects.push(bottle);
-      this.bottlesInInventory--;
-      this.salsaBar.setPercentage(this.bottlesInInventory * 20);
-    }
   }
 
   draw() {
