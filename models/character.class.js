@@ -1,3 +1,28 @@
+/**
+ * Represents the main character in the game.
+ * 
+ * The `Character` class, which extends `MovableObject`, defines the primary playable 
+ * character's appearance, animations, and behavior in the game. It encapsulates animations 
+ * for walking, jumping, being hurt, dying, and idling. It also manages sound effects 
+ * corresponding to walking and jumping actions.
+ * 
+ * @class
+ * @extends MovableObject
+ * 
+ * @property {number} height - The height of the character. Defaults to 280.
+ * @property {number} y - The vertical position of the character. Defaults to 135.
+ * @property {number} speed - The speed at which the character moves. Defaults to 10.
+ * @property {Array<string>} IMAGES_* - Arrays containing the paths of images for different animations.
+ * @property {number} currentImage - Index of the current image being displayed in an animation sequence.
+ * @property {World} world - A reference to the game world.
+ * @property {Audio} walking_sound - Sound effect for walking.
+ * @property {Audio} jump_sound - Sound effect for jumping.
+ * 
+ * @method constructor - Initializes a new instance of Character. Sets up animations, gravity, and other properties.
+ * @method animate - Initiates the game loop for character movement and playing animations.
+ * @method moveCharacter - Moves the character based on the input from the world's keyboard. Plays sound effects as needed.
+ * @method playCharacterStatusAnimations - Chooses the right animation based on the character's status.
+ */
 class Character extends MovableObject {
   height = 280;
   y = 135;
@@ -48,12 +73,12 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/idle/I-8.png",
     "img/2_character_pepe/1_idle/idle/I-9.png",
     "img/2_character_pepe/1_idle/idle/I-10.png",
-];
+  ];
 
   currentImage = 0;
   world;
   walking_sound = new Audio("audio/walk.mp3");
-  jump_sound = new Audio("/audio/jump.mp3")
+  jump_sound = new Audio("/audio/jump.mp3");
 
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
@@ -68,52 +93,63 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-      this.walking_sound.pause();
-
-      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-        this.moveRight();
-        if (!world.StopSounds){
-        this.walking_sound.play();
-        }
-        else{
-          this.walking_sound.pause();
-        }
-      }
-
-      if (this.world.keyboard.LEFT && this.x > 0) {
-        this.moveLeft();
-        this.otherDirection = true;
-      }
-
-      if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-        this.jump();
-        if (!world.StopSounds){
-                  this.jump_sound.play();
-        } else{
-          this.jump_sound.pause();
-        }
-
-      }
-      this.world.camera_x = -this.x + 100;
+      this.moveCharacter();
     }, 1000 / 60);
 
     setInterval(() => {
-      if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
-      } else if(this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-      } else if (this.isAboveGround()) {
-        this.playAnimation(this.IMAGES_JUMPING);
-      } else {
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-          //Walk Animation
-          this.playAnimation(this.IMAGES_WALKING);
-        }
-      }
-      if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.isAboveGround() && !this.isHurt() && !this.isDead()) {
-        this.playAnimation(this.IMAGES_IDLE);
-      }
+      this.playCharacterStatusAnimations();
     }, 50);
   }
 
+  moveCharacter() {
+    this.walking_sound.pause();
+
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      this.moveRight();
+      if (!world.StopSounds) {
+        this.walking_sound.play();
+      } else {
+        this.walking_sound.pause();
+      }
+    }
+
+    if (this.world.keyboard.LEFT && this.x > 0) {
+      this.moveLeft();
+      this.otherDirection = true;
+    }
+
+    if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+      this.jump();
+      if (!world.StopSounds) {
+        this.jump_sound.play();
+      } else {
+        this.jump_sound.pause();
+      }
+    }
+    this.world.camera_x = -this.x + 100;
+  }
+
+  playCharacterStatusAnimations() {
+    if (this.isDead()) {
+      this.playAnimation(this.IMAGES_DEAD);
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+    } else if (this.isAboveGround()) {
+      this.playAnimation(this.IMAGES_JUMPING);
+    } else {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        //Walk Animation
+        this.playAnimation(this.IMAGES_WALKING);
+      }
+    }
+    if (
+      !this.world.keyboard.RIGHT &&
+      !this.world.keyboard.LEFT &&
+      !this.isAboveGround() &&
+      !this.isHurt() &&
+      !this.isDead()
+    ) {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
+  }
 }

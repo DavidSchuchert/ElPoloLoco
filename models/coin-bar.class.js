@@ -1,3 +1,27 @@
+/**
+ * Represents the coin status bar in the game's HUD (Heads-Up Display).
+ *
+ * The `COINBAR` class extends the `DRAWABLE_OBJECT` class and provides a visual representation
+ * of the player's coin collection progress. The bar changes its image based on the percentage
+ * of coins collected, offering the player a visual feedback on their collection status.
+ *
+ * @class
+ * @extends DRAWABLE_OBJECT
+ *
+ * @property {Array<string>} IMAGES - Array of image paths representing different coin collection statuses.
+ * @property {number} percentage - Current percentage of coins collected by the player.
+ *
+ * @constructor
+ * Initializes a new coin status bar, loads its images, sets its initial position,
+ * dimensions, and percentage value. Upon instantiation, the visual representation of the bar
+ * is set based on the initial percentage value.
+ *
+ * @method setPercentage
+ * Sets the coin collection percentage and updates the bar's visual representation accordingly.
+ *
+ * @method resolveImageIndex
+ * Determines which image from the IMAGES array should be displayed based on the current coin collection percentage.
+ */
 class COINBAR extends DRAWABLE_OBJECT {
   IMAGES = [
     "img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",

@@ -1,3 +1,19 @@
+/**
+ * Represents the health bar of the main antagonist, the Endboss.
+ * 
+ * The `BOSSHEALTHBAR` is a type of `DRAWABLE_OBJECT` that visually represents the health 
+ * status of the Endboss using various images to show the health percentage.
+ * 
+ * @class
+ * @extends DRAWABLE_OBJECT
+ * 
+ * @property {Array<string>} IMAGES - The array of image paths used to represent different health percentages.
+ * @property {number} percentage - The current health percentage of the Endboss. Defaults to 100.
+ * 
+ * @method constructor - Creates a new instance of BOSSHEALTHBAR with default settings.
+ * @method setPercentage - Updates the health percentage and changes the display image accordingly.
+ * @method resolveImageIndex - Determines the appropriate image index based on the current health percentage.
+ */
 class BOSSHEALTHBAR extends DRAWABLE_OBJECT {
   IMAGES = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png",

@@ -1,3 +1,28 @@
+/**
+ * Represents a status bar that visually indicates a particular status (e.g., health) in the game.
+ * 
+ * The `STATUSBAR` class provides a visual representation for certain game statuses, such as player's health.
+ * It uses different images to represent different percentages of the status. For instance, 
+ * if it's representing health, then an image with a fuller bar would mean higher health and vice versa.
+ * 
+ * @class
+ * 
+ * @extends DRAWABLE_OBJECT
+ * 
+ * @property {Array<string>} IMAGES - List of paths to images corresponding to various percentage values.
+ * @property {number} percentage - Current percentage value that the status bar represents.
+ * 
+ * @constructor 
+ * Initializes a new STATUSBAR object with default parameters.
+ * 
+ * @method setPercentage
+ * Sets the percentage value of the status bar and updates its image accordingly.
+ * @param {number} percentage - The new percentage value.
+ * 
+ * @method resolveImageIndex
+ * Resolves the index of the image in the IMAGES array based on the current percentage.
+ * @returns {number} Index of the appropriate image.
+ */
 class STATUSBAR extends DRAWABLE_OBJECT {
   IMAGES = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",

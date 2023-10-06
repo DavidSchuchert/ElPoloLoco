@@ -1,3 +1,6 @@
+/**
+ * Represents the game world.
+ */
 class World {
   character = new Character();
   level = level1;
@@ -5,10 +8,10 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  statusBar = new STATUSBAR;
-  salsaBar = new SALSABAR;
-  coinBar = new COINBAR;
-  bossHealthBar = new BOSSHEALTHBAR;
+  statusBar = new STATUSBAR();
+  salsaBar = new SALSABAR();
+  coinBar = new COINBAR();
+  bossHealthBar = new BOSSHEALTHBAR();
   throwableObjects = [];
   bottlesInInventory = 0;
   CoinsInInventory = 0;
@@ -18,7 +21,11 @@ class World {
   bottle_smash_sound = new Audio("audio/bottlesmash.mp3");
   StopSounds = false;
 
-
+  /**
+   * Initializes a new instance of the World.
+   * @param {HTMLCanvasElement} canvas - The canvas on which the game will be drawn.
+   * @param {Object} keyboard - The keyboard input handler.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -28,38 +35,47 @@ class World {
     this.run();
     this.collisionManager = new CollisionManager(this);
   }
+
+  /**
+   * Sets the world instance for the character.
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * Begins the game loop to check for collisions and thrown objects.
+   * Check if Mute or Unmute
+   */
   run() {
     setInterval(() => {
       this.collisionManager.checkCollisions();
       this.collisionManager.checkThrowObjects();
     }, 100);
-    if (!this.StopSounds){
+    if (!this.StopSounds) {
       this.bg_music.play();
     } else {
       this.bg_music.pause();
     }
-
   }
 
+  /**
+   * Clears the canvas and redraws the game world.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
-    
+
     this.ctx.translate(-this.camera_x, 0);
     ///----SPACE FOR FIXED OBJECTS!----
     this.addToMap(this.statusBar);
     this.addToMap(this.salsaBar);
     this.addToMap(this.coinBar);
-  
+
     this.ctx.translate(this.camera_x, 0);
 
- 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
@@ -68,23 +84,28 @@ class World {
     this.addToMap(this.bossHealthBar);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.throwableObjects);
-    
 
     this.ctx.translate(-this.camera_x, 0);
-
-    //draw wird immer wieder aufgerufen
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
 
+  /**
+   * Adds multiple objects to the game map.
+   * @param {Array} objects - An array of game objects.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Adds a single object to the game map.
+   * @param {Object} mo - The game object.
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -97,6 +118,10 @@ class World {
     }
   }
 
+  /**
+   * Flips the image of the game object for drawing.
+   * @param {Object} mo - The game object.
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -104,18 +129,24 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Restores the flipped image of the game object to its original state.
+   * @param {Object} mo - The game object.
+   */
   flipimageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
 
-  GameEnds(){
+  /**
+   * Ends the game and displays the end screen.
+   * Ends the BG Music
+   */
+  GameEnds() {
     setTimeout(() => {
       document.getElementById("canvas").style.display = "none";
       document.getElementById("endscreen").style.display = "block";
     }, 1000);
     this.bg_music.pause();
   }
-
-
 }

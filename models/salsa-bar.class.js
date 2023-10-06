@@ -1,3 +1,20 @@
+/**
+ * Represents a visual status bar indicating the amount of salsa available.
+ *
+ * The `SALSABAR` class extends the `DRAWABLE_OBJECT` class and provides functionality to display
+ * a bar that visually represents a percentage value by displaying appropriate image assets
+ * based on the set percentage. This class can be used to give the player feedback on
+ * how much salsa they have left in the game.
+ *
+ * @class
+ * @extends DRAWABLE_OBJECT
+ *
+ * @property {string[]} IMAGES - Array of file paths to image assets representing different percentage states of the salsa bar.
+ * @property {number} percentage - The current percentage value the salsa bar should display.
+ *
+ * @method setPercentage - Sets the percentage value and updates the displayed image based on the new percentage.
+ * @method resolveImageIndex - Determines which image from the IMAGES array should be displayed based on the current percentage value.
+ */
 class SALSABAR extends DRAWABLE_OBJECT {
   IMAGES = [
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
