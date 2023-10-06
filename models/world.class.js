@@ -145,7 +145,9 @@ class World {
   GameEnds() {
     setTimeout(() => {
       document.getElementById("canvas").style.display = "none";
+      document.getElementById("Hud_Game").style.display = "none";
       document.getElementById("endscreen").style.display = "block";
+
     }, 1000);
     this.bg_music.pause();
   }
