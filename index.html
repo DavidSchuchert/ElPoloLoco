@@ -34,21 +34,36 @@
 
 <body onload="">
     <h1>El pollo loco</h1>
+    <div class="info">
+        <div class="controls" id="controls">
+            Left/Right: Walk  
+            Space: Jump  
+            D: Throw Bottle
+        </div>
+        <div class="mutebuttons">
+            <div class="mute_button" id="mutebutton"><button onclick="muteAllSounds()"><img
+                        src="/img/volume-mute.png"></button>
+            </div>
+            <div class="unmute_button" id="unmutebutton"><button onclick="unmuteAllSounds()"><img
+                        src="/img/volume.png"></button></div>
+        </div>
+    </div>
     <div class="startscreen" id="startscreen"><img src="img/9_intro_outro_screens/start/startscreen_2.png"
             alt="startscreen" width="720px" height="480px"><button class="startbutton" onclick="init()"
             id="startbutton">START GAME</button></img></div>
-    <div class="Hud_Game"><canvas class="game" id="canvas" width="720px" height="480px">
-    </canvas>
-    <div class="buttons_left"><button id="btnLeft"><img src="./img/Buttons/left-arrow.png" alt=""></button>
-    <button id="btnRight"><img src="./img/Buttons/arrow-right.png" alt=""></button></div>
-    <div class="buttons_right">
-    <button id="btnJump"><img src="./img/Buttons/up-arrow.png" alt=""></button>
-    <button id="btnThrow"><img src="./img/Buttons/wine-bottle.png" alt=""></button></div>
-</div>
+    <div class="Hud_Game" id="Hud_Game">
+        <canvas class="game" id="canvas" width="720px" height="480px">
+        </canvas>
+        <div class="buttons_left"><button id="btnLeft"><img src="./img/Buttons/left-arrow.png" alt=""></button>
+            <button id="btnRight"><img src="./img/Buttons/arrow-right.png" alt=""></button>
+        </div>
+        <div class="buttons_right">
+            <button id="btnJump"><img src="./img/Buttons/up-arrow.png" alt=""></button>
+            <button id="btnThrow"><img src="./img/Buttons/wine-bottle.png" alt=""></button>
+        </div>
+    </div>
     <div class="endscreen" id="endscreen"><img src="img/9_intro_outro_screens/game_over/game over.png" alt="endscreen"
             width="720px" height="480px"></img></div>
-    <div class="mute_button" id="mutebutton"><button onclick="muteAllSounds()"><img src="/img/volume-mute.png"></button></div>
-    <div class="unmute_button" id="unmutebutton"><button onclick="unmuteAllSounds()"><img src="/img/volume.png"></button></div>
 
 </body>
 

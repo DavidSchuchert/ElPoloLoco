@@ -14,12 +14,13 @@ body {
     margin: 0px;
     justify-content: center;
 }
-
+h1{
+    margin: 16px;
+}
 .game {
     background-color: black;
     border-radius: 16px;
     box-shadow: 3px 5px 0px rgba(0, 0, 0, 0.278);
-    display:none;
 }
 
 .startscreen {
@@ -115,6 +116,7 @@ body {
 
 .Hud_Game{
     position: relative;
+    display: none;
 }
 
 .Hud_Game button{
@@ -132,6 +134,48 @@ body {
     height: 46px;
     width: 46px;
 }
+
+.info{
+    
+        display: flex;
+        justify-content: space-between;
+        gap: 137px;
+        padding-bottom: 8px;
+        align-items: center;
+    
+}
+.controls{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-align: start;
+    font-size: 32px;
+}
+
+
+@media (max-width: 710px){
+.controls{
+    font-size: 28px;
+}
+@media (max-width: 650px){
+    .info{
+        gap:64px;
+    }
+}
+@media (max-width: 570px){
+    .info{
+        gap:8px;
+    }
+    .controls{
+        font-size: 22px;
+    }
+}
+}
 /* Smartphone */
 @media only screen and (max-width: 760px){
     .game{
@@ -146,9 +190,6 @@ body {
         height: auto;
     }
     h1{
-        display:none;
-    }
-    .mute_button{
         display:none;
     }
     .buttons_left{
@@ -172,9 +213,6 @@ body {
         width: auto;
     }
     h1{
-        display:none;
-    }
-    .mute_button{
         display:none;
     }
     .buttons_left{

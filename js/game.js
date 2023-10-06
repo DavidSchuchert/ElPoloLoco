@@ -6,7 +6,7 @@ let startButton = document.getElementById("startbutton");
 
 function init() {
   document.getElementById("startscreen").style.display = 'none';
-  document.getElementById("canvas").style.display = 'block';
+  document.getElementById("Hud_Game").style.display = 'block';
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   addTouch();
