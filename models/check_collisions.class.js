@@ -31,7 +31,6 @@ class CollisionManager {
         this.world.character.isColliding(enemy) &&
         this.world.character.speedY <= -10
       ) {
-        console.log("enemy Killed");
         enemy.hit();
         setTimeout(() => {
           let enemyIndex = this.world.level.enemies.indexOf(enemy);
@@ -53,7 +52,6 @@ class CollisionManager {
     this.world.throwableObjects.forEach((throwableBottle, index) => {
       this.world.level.endboss.forEach((boss) => {
         if (boss.isColliding(throwableBottle)) {
-          console.log("hit Boss");
           boss.bossGotHit();
           this.world.bossHealthBar.setPercentage(boss.BossHealth);
           if (!this.world.StopSounds) {
