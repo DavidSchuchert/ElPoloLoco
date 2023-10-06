@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: models/coins.class.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,45 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: models/coins.class.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents a collectible coin in the game.
+ *
+ * The `Coins` class extends the `MovableObject` class and provides the visual representation
+ * of a coin in the game. This coin can be placed at various positions within the game world
+ * and potentially be collected by the player.
+ *
+ * @class
+ * @extends MovableObject
+ *
+ * @property {number} y - The y-coordinate for the coin's starting position.
+ * @property {number} height - The height of the coin's image.
+ * @property {number} width - The width of the coin's image.
+ *
+ * @constructor
+ * Initializes a new coin object, sets its image and randomizes its x-coordinate within a specific range.
+ */
+class Coins extends MovableObject {
+  y = 240;
+  height = 100;
+  width = 100;
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  constructor() {
+    super().loadImage("../img/8_coin/coin_2.png");
+    this.x = 500 + Math.random() * 1500;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

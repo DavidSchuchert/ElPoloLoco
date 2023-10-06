@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/character.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/character.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents the main character in the game.
+ * 
+ * The `Character` class, which extends `MovableObject`, defines the primary playable 
+ * character's appearance, animations, and behavior in the game. It encapsulates animations 
+ * for walking, jumping, being hurt, dying, and idling. It also manages sound effects 
+ * corresponding to walking and jumping actions.
+ * 
+ * @class
+ * @extends MovableObject
+ * 
+ * @property {number} height - The height of the character. Defaults to 280.
+ * @property {number} y - The vertical position of the character. Defaults to 135.
+ * @property {number} speed - The speed at which the character moves. Defaults to 10.
+ * @property {Array&lt;string>} IMAGES_* - Arrays containing the paths of images for different animations.
+ * @property {number} currentImage - Index of the current image being displayed in an animation sequence.
+ * @property {World} world - A reference to the game world.
+ * @property {Audio} walking_sound - Sound effect for walking.
+ * @property {Audio} jump_sound - Sound effect for jumping.
+ * 
+ * @method constructor - Initializes a new instance of Character. Sets up animations, gravity, and other properties.
+ * @method animate - Initiates the game loop for character movement and playing animations.
+ * @method moveCharacter - Moves the character based on the input from the world's keyboard. Plays sound effects as needed.
+ * @method playCharacterStatusAnimations - Chooses the right animation based on the character's status.
+ */
+class Character extends MovableObject {
+  height = 280;
+  y = 135;
+  speed = 10;
+  IMAGES_WALKING = [
+    "../img/2_character_pepe/2_walk/W-21.png",
+    "../img/2_character_pepe/2_walk/W-22.png",
+    "../img/2_character_pepe/2_walk/W-23.png",
+    "../img/2_character_pepe/2_walk/W-24.png",
+    "../img/2_character_pepe/2_walk/W-25.png",
+    "../img/2_character_pepe/2_walk/W-26.png",
+  ];
+  IMAGES_JUMPING = [
+    "img/2_character_pepe/3_jump/J-31.png",
+    "img/2_character_pepe/3_jump/J-32.png",
+    "img/2_character_pepe/3_jump/J-33.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-35.png",
+    "img/2_character_pepe/3_jump/J-36.png",
+    "img/2_character_pepe/3_jump/J-37.png",
+    "img/2_character_pepe/3_jump/J-38.png",
+    "img/2_character_pepe/3_jump/J-39.png",
+  ];
+
+  IMAGES_DEAD = [
+    "img/2_character_pepe/5_dead/D-51.png",
+    "img/2_character_pepe/5_dead/D-52.png",
+    "img/2_character_pepe/5_dead/D-53.png",
+    "img/2_character_pepe/5_dead/D-54.png",
+    "img/2_character_pepe/5_dead/D-55.png",
+    "img/2_character_pepe/5_dead/D-56.png",
+    "img/2_character_pepe/5_dead/D-57.png",
+  ];
+
+  IMAGES_HURT = [
+    "img/2_character_pepe/4_hurt/H-41.png",
+    "img/2_character_pepe/4_hurt/H-42.png",
+    "img/2_character_pepe/4_hurt/H-43.png",
+  ];
+  IMAGES_IDLE = [
+    "img/2_character_pepe/1_idle/idle/I-1.png",
+    "img/2_character_pepe/1_idle/idle/I-2.png",
+    "img/2_character_pepe/1_idle/idle/I-3.png",
+    "img/2_character_pepe/1_idle/idle/I-4.png",
+    "img/2_character_pepe/1_idle/idle/I-5.png",
+    "img/2_character_pepe/1_idle/idle/I-6.png",
+    "img/2_character_pepe/1_idle/idle/I-7.png",
+    "img/2_character_pepe/1_idle/idle/I-8.png",
+    "img/2_character_pepe/1_idle/idle/I-9.png",
+    "img/2_character_pepe/1_idle/idle/I-10.png",
+  ];
+
+  currentImage = 0;
+  world;
+  walking_sound = new Audio("audio/walk.mp3");
+  jump_sound = new Audio("/audio/jump.mp3");
+
+  constructor() {
+    super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
+    this.loadImages(this.IMAGES_WALKING);
+    this.loadImages(this.IMAGES_JUMPING);
+    this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEAD);
+    this.loadImages(this.IMAGES_IDLE);
+    this.applyGravity();
+    this.animate();
+  }
+
+  animate() {
+    setInterval(() => {
+      this.moveCharacter();
+    }, 1000 / 60);
+
+    setInterval(() => {
+      this.playCharacterStatusAnimations();
+    }, 50);
+  }
+
+  moveCharacter() {
+    this.walking_sound.pause();
+
+    if (this.world.keyboard.RIGHT &amp;&amp; this.x &lt; this.world.level.level_end_x) {
+      this.moveRight();
+      if (!world.StopSounds) {
+        this.walking_sound.play();
+      } else {
+        this.walking_sound.pause();
+      }
+    }
+
+    if (this.world.keyboard.LEFT &amp;&amp; this.x > 0) {
+      this.moveLeft();
+      this.otherDirection = true;
+    }
+
+    if (this.world.keyboard.SPACE &amp;&amp; !this.isAboveGround()) {
+      this.jump();
+      if (!world.StopSounds) {
+        this.jump_sound.play();
+      } else {
+        this.jump_sound.pause();
+      }
+    }
+    this.world.camera_x = -this.x + 100;
+  }
+
+  playCharacterStatusAnimations() {
+    if (this.isDead()) {
+      this.playAnimation(this.IMAGES_DEAD);
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+    } else if (this.isAboveGround()) {
+      this.playAnimation(this.IMAGES_JUMPING);
+    } else {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        //Walk Animation
+        this.playAnimation(this.IMAGES_WALKING);
+      }
+    }
+    if (
+      !this.world.keyboard.RIGHT &amp;&amp;
+      !this.world.keyboard.LEFT &amp;&amp;
+      !this.isAboveGround() &amp;&amp;
+      !this.isHurt() &amp;&amp;
+      !this.isDead()
+    ) {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CollisionManager.html">CollisionManager</a></li><li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li><li><a href="Initializes%2520a%2520new%2520Keyboard%2520object%2520with%2520all%2520keys%2520set%2520to%2520an%2520unpressed%2520state%2520(false)..html">Initializes a new Keyboard object with all keys set to an unpressed state (false).</a></li><li><a href="Initializes%2520a%2520new%2520cloud%2520object,%2520sets%2520its%2520image,%2520and%2520randomizes%2520its%2520x-coordinate%250Dwithin%2520a%2520specific%2520range.%2520After%2520creation,%2520the%2520cloud%2520starts%2520its%2520animation_movement..html">Initializes a new cloud object, sets its image, and randomizes its x-coordinatewithin a specific range. After creation, the cloud starts its animation/movement.</a></li><li><a href="Initializes%2520a%2520new%2520coin%2520object,%2520sets%2520its%2520image%2520and%2520randomizes%2520its%2520x-coordinate%2520within%2520a%2520specific%2520range..html"> sets its image and randomizes its x-coordinate within a specific range.</a></li><li><a href="Level.html">Level</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addTouch">addTouch</a></li><li><a href="global.html#bossGotHit-HandlesthelogicwhentheEndbossishitbyaprojectile.">bossGotHit - Handles the logic when the Endboss is hit by a projectile.</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#constructor-CreatesanewinstanceofBackgroundObjectwiththespecifiedimage,x-coordinate,andadjuststhey-coordinatebasedontheobject'sheight.">constructor - Creates a new instance of BackgroundObject with the specified image, x-coordinate,                       and adjusts the y-coordinate based on the object's height.</a></li><li><a href="global.html#constructor-InitializesanewinstanceofBottles.Thex-coordinateisrandomizedwithinarange,whiletheimagepathforthebottleispredefined.">constructor - Initializes a new instance of Bottles. The x-coordinate                      is randomized within a range, while the image path for the                      bottle is predefined.</a></li><li><a href="global.html#hit-FunctiontohandletheeventwhentheChickenishit.">hit - Function to handle the event when the Chicken is hit.</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#jump-Makestheobjectjump.">jump - Makes the object jump.</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#level1">level1</a></li><li><a href="global.html#muteAllSounds">muteAllSounds</a></li><li><a href="global.html#playCharacterStatusAnimations-Choosestherightanimationbasedonthecharacter'sstatus.">playCharacterStatusAnimations - Chooses the right animation based on the character's status.</a></li><li><a href="global.html#resolveImageIndexDetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentcoincollectionpercentage.">resolveImageIndexDetermines which image from the IMAGES array should be displayed based on the current coin collection percentage.</a></li><li><a href="global.html#resolveImageIndexResolvestheindexoftheimageintheIMAGESarraybasedonthecurrentpercentage.">resolveImageIndexResolves the index of the image in the IMAGES array based on the current percentage.</a></li><li><a href="global.html#resolveImageIndex-Determinestheappropriateimageindexbasedonthecurrenthealthpercentage.">resolveImageIndex - Determines the appropriate image index based on the current health percentage.</a></li><li><a href="global.html#resolveImageIndex-DetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentpercentagevalue.">resolveImageIndex - Determines which image from the IMAGES array should be displayed based on the current percentage value.</a></li><li><a href="global.html#startButton">startButton</a></li><li><a href="global.html#throw-SetsthespeedYandgravityfortheThrowableObjectandupdatesitsxpositionovertime.">throw - Sets the speedY and gravity for the ThrowableObject and updates its x position over time.</a></li><li><a href="global.html#unmuteAllSounds">unmuteAllSounds</a></li><li><a href="global.html#world">world</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 06 2023 11:12:38 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
