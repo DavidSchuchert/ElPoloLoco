@@ -28,6 +28,7 @@ let startButton = document.getElementById("startbutton");
  * Initializes the game by hiding the start screen and displaying the game canvas.
  */
 function init() {
+  document.getElementById("endscreen").style.display = 'none';
   document.getElementById("startscreen").style.display = 'none';
   document.getElementById("Hud_Game").style.display = 'block';
   canvas = document.getElementById("canvas");
