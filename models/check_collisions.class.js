@@ -8,8 +8,8 @@ class CollisionManager {
    */
   constructor(world) {
     this.world = world;
-    this.tollerance_x = 100;
-    this.tollerance_y = 100;
+    this.tollerance_x = 10;
+    this.tollerance_y = 25;
   }
 
   /**
