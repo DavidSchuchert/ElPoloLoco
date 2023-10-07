@@ -80,6 +80,7 @@ h1{
     align-items: center;
     justify-content: center;
     margin-top: 8px;
+    cursor: pointer;
 }
 
 .mute_button img{
@@ -98,6 +99,7 @@ h1{
     align-items: center;
     justify-content: center;
     margin-top: 8px;
+    cursor: pointer;
 }
 
 .unmute_button img{
