@@ -40,10 +40,12 @@ function init() {
  * Mutes all game sounds and displays the unmute button.
  */
 function muteAllSounds(){
-  world.StopSounds = true;
-  world.bg_music.pause()
-  document.getElementById("unmutebutton").style.display = "block";
-  document.getElementById("mutebutton").style.display = "none";
+  if (world) {
+    world.StopSounds = true;
+    world.bg_music.pause();
+    document.getElementById("unmutebutton").style.display = "block";
+    document.getElementById("mutebutton").style.display = "none";
+  }
 }
 /**
  * Unmutes all game sounds and displays the mute button.
