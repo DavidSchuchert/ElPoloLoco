@@ -1,27 +1,41 @@
 /**
  * Represents the main character in the game.
  * 
- * The `Character` class, which extends `MovableObject`, defines the primary playable 
- * character's appearance, animations, and behavior in the game. It encapsulates animations 
- * for walking, jumping, being hurt, dying, and idling. It also manages sound effects 
- * corresponding to walking and jumping actions.
+ * The `Character` class is an extension of the `MovableObject` class. It provides functionality 
+ * specific to the main character, such as walking, jumping, animations for different statuses, and 
+ * responding to keyboard inputs. The character has different states represented by different animations, 
+ * such as walking, jumping, being hurt, being idle, or being dead.
  * 
  * @class
+ * 
  * @extends MovableObject
  * 
- * @property {number} height - The height of the character. Defaults to 280.
- * @property {number} y - The vertical position of the character. Defaults to 135.
- * @property {number} speed - The speed at which the character moves. Defaults to 10.
- * @property {Array<string>} IMAGES_* - Arrays containing the paths of images for different animations.
- * @property {number} currentImage - Index of the current image being displayed in an animation sequence.
- * @property {World} world - A reference to the game world.
- * @property {Audio} walking_sound - Sound effect for walking.
- * @property {Audio} jump_sound - Sound effect for jumping.
+ * @property {Array<string>} IMAGES_WALKING - Array of image paths for the walking animation.
+ * @property {Array<string>} IMAGES_JUMPING - Array of image paths for the jumping animation.
+ * @property {Array<string>} IMAGES_DEAD - Array of image paths for the death animation.
+ * @property {Array<string>} IMAGES_HURT - Array of image paths for the hurt animation.
+ * @property {Array<string>} IMAGES_IDLE - Array of image paths for the idle animation.
+ * @property {number} currentImage - Index of the current image being displayed.
+ * @property {Object} world - Reference to the world in which the character exists.
+ * @property {Audio} walking_sound - Audio object for the walking sound.
+ * @property {Audio} jump_sound - Audio object for the jumping sound.
+ * @property {number} animationInterval - Interval for the character's animations.
  * 
- * @method constructor - Initializes a new instance of Character. Sets up animations, gravity, and other properties.
- * @method animate - Initiates the game loop for character movement and playing animations.
- * @method moveCharacter - Moves the character based on the input from the world's keyboard. Plays sound effects as needed.
- * @method playCharacterStatusAnimations - Chooses the right animation based on the character's status.
+ * @constructor 
+ * Initializes a new Character object with default parameters, loads relevant images, and starts animations.
+ * 
+ * @method animate
+ * Starts the main animation loop for the character.
+ * 
+ * @method setAnimationInterval
+ * Sets the interval rate for the character's animations.
+ * @param {number} rate - The interval rate in milliseconds.
+ * 
+ * @method moveCharacter
+ * Moves the character based on keyboard inputs.
+ * 
+ * @method playCharacterStatusAnimations
+ * Plays the relevant animation based on the character's status.
  */
 class Character extends MovableObject {
   height = 280;
@@ -79,6 +93,7 @@ class Character extends MovableObject {
   world;
   walking_sound = new Audio("audio/walk.mp3");
   jump_sound = new Audio("/audio/jump.mp3");
+  animationInterval = null;
 
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
@@ -95,10 +110,18 @@ class Character extends MovableObject {
     setInterval(() => {
       this.moveCharacter();
     }, 1000 / 60);
-
-    setInterval(() => {
+  
+    this.setAnimationInterval(50);
+  }
+  
+  setAnimationInterval(rate) {
+    if (this.animationInterval) {
+      clearInterval(this.animationInterval);
+    }
+    
+    this.animationInterval = setInterval(() => {
       this.playCharacterStatusAnimations();
-    }, 50);
+    }, rate);
   }
 
   moveCharacter() {
@@ -131,14 +154,17 @@ class Character extends MovableObject {
 
   playCharacterStatusAnimations() {
     if (this.isDead()) {
+      this.setAnimationInterval(50);
       this.playAnimation(this.IMAGES_DEAD);
     } else if (this.isHurt()) {
+      this.setAnimationInterval(50);
       this.playAnimation(this.IMAGES_HURT);
     } else if (this.isAboveGround()) {
+      this.setAnimationInterval(100); 
       this.playAnimation(this.IMAGES_JUMPING);
     } else {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        //Walk Animation
+        this.setAnimationInterval(50);
         this.playAnimation(this.IMAGES_WALKING);
       }
     }
@@ -149,6 +175,7 @@ class Character extends MovableObject {
       !this.isHurt() &&
       !this.isDead()
     ) {
+      this.setAnimationInterval(50);
       this.playAnimation(this.IMAGES_IDLE);
     }
   }
