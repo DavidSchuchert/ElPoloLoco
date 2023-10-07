@@ -171,6 +171,7 @@ h1{
     gap: 16px;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .rotate_device img{
         filter: invert(95%) sepia(100%) saturate(7497%) hue-rotate(357deg) brightness(106%) contrast(101%);
