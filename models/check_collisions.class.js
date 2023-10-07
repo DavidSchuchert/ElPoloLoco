@@ -47,6 +47,19 @@ class CollisionManager {
       }
     });
 
+    /* Check for Collision from Endboss to Character */
+
+    this.world.level.endboss.forEach((boss, index) => {
+      if (this.world.character.isColliding(boss)) {
+        this.world.character.hit();
+        this.world.statusBar.setPercentage(this.world.character.energy);
+        boss.hasHit = true;
+      }
+      if (this.world.character.energy == 0) {
+        this.world.GameEnds();
+      }
+    });
+
     /* Check for Collision from Bottle with Endboss */
     this.world.throwableObjects.forEach((throwableBottle, index) => {
       this.world.level.endboss.forEach((boss) => {

@@ -37,6 +37,12 @@ class Endboss extends MovableObject {
   hit = false;
 
   /**
+   * indicates when Endboss hits Character.
+   * @type {boolean}
+   */
+  hasHit = false;
+
+  /**
    * Indicates if the Endboss is dead.
    * @type {boolean}
    */
@@ -77,25 +83,45 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+    /**
+   * Images representing the walking state of the Endboss.
+   * @type {Array<string>}
+   */
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
     "img/4_enemie_boss_chicken/1_walk/G3.png",
     "img/4_enemie_boss_chicken/1_walk/G4.png",
+  ]
 
+      /**
+   * Images representing the has hit state of the Endboss.
+   * @type {Array<string>}
+   */
+  IMAGES_HASHIT = [
+    "img/4_enemie_boss_chicken/3_attack/G13.png",
+    "img/4_enemie_boss_chicken/3_attack/G14.png",
+    "img/4_enemie_boss_chicken/3_attack/G15.png",
+    "img/4_enemie_boss_chicken/3_attack/G16.png",
+    "img/4_enemie_boss_chicken/3_attack/G17.png",
+    "img/4_enemie_boss_chicken/3_attack/G18.png",
+    "img/4_enemie_boss_chicken/3_attack/G19.png",
+    "img/4_enemie_boss_chicken/3_attack/G20.png",
   ]
 
   /**
    * Creates a new Endboss instance, sets its position, loads its images, and initializes animations.
    */
-  constructor() {
+  constructor(bossHealthBar) {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.currentImage = 0;
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_HIT);
     this.loadImages(this.IMAGES_DEAD);
-    this.x = 2500;
+    this.loadImages(this.IMAGES_HASHIT);
+    this.x = 2300;
     this.animate();
+    this.bossHealthBar = bossHealthBar;
   }
 
   /**
@@ -113,7 +139,11 @@ class Endboss extends MovableObject {
         this.hit = false;
       } else if (this.bossIsDead) {
         this.playAnimation(this.IMAGES_DEAD);
-      } else {
+      }
+        else if (this.hasHit){
+          this.playAnimation(this.IMAGES_HASHIT);
+        }
+       else {
         this.playAnimation(this.IMAGES_WALKING);
       }
     }, 200);

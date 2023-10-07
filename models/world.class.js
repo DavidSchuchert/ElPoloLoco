@@ -73,6 +73,8 @@ class World {
     this.addToMap(this.statusBar);
     this.addToMap(this.salsaBar);
     this.addToMap(this.coinBar);
+    this.addToMap(this.bossHealthBar);
+
 
     this.ctx.translate(this.camera_x, 0);
 
@@ -81,7 +83,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.endboss);
     this.addObjectsToMap(this.level.bottles);
-    this.addToMap(this.bossHealthBar);
+
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.throwableObjects);
 
