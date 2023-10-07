@@ -23,6 +23,9 @@ let keyboard = new Keyboard();
 let startButton = document.getElementById("startbutton");
 
 
+let isSoundMuted = localStorage.getItem("soundMuted") === "true";
+
+
 
 /**
  * Initializes the game by hiding the start screen and displaying the game canvas.
@@ -34,6 +37,14 @@ function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   addTouch();
+  let isSoundMuted = localStorage.getItem("soundMuted") === "true";
+
+  if (isSoundMuted) {
+    muteAllSounds();
+  } else {
+    unmuteAllSounds();
+    world.bg_music.play();
+  }
 }
 
 /**
@@ -45,16 +56,24 @@ function muteAllSounds(){
     world.bg_music.pause();
     document.getElementById("unmutebutton").style.display = "block";
     document.getElementById("mutebutton").style.display = "none";
+
+    localStorage.setItem("soundMuted", true);
   }
 }
 /**
  * Unmutes all game sounds and displays the mute button.
  */
-function unmuteAllSounds(){
-  world.StopSounds = false;
-  world.bg_music.play()
-  document.getElementById("unmutebutton").style.display = "none";
-  document.getElementById("mutebutton").style.display = "block";
+function unmuteAllSounds() {
+  if (world) {
+    if (world.StopSounds) {
+      world.StopSounds = false;
+      document.getElementById("unmutebutton").style.display = "none";
+      document.getElementById("mutebutton").style.display = "block";
+      world.bg_music.play();
+      // Speichere den Unmute-Zustand im Local Storage
+      localStorage.setItem("soundMuted", false);
+    }
+  }
 }
 
 /** Thats the implementation of our Touch Controls for Smartphones */

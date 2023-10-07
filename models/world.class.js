@@ -52,11 +52,6 @@ class World {
       this.collisionManager.checkCollisions();
       this.collisionManager.checkThrowObjects();
     }, 100);
-    if (!this.StopSounds) {
-      this.bg_music.play();
-    } else {
-      this.bg_music.pause();
-    }
   }
 
   /**
