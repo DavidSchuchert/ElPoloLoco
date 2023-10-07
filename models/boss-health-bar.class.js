@@ -35,33 +35,4 @@ class BOSSHEALTHBAR extends DRAWABLE_OBJECT{
     this.setPercentage(100);
   }
 
-  /**
-   * Sets the health percentage for the boss and updates the displayed image accordingly.
-   * @param {number} percentage - The new health percentage for the boss.
-   */
-  setPercentage(percentage) {
-    this.percentage = percentage;
-    let path = this.IMAGES[this.resolveImageIndex()];
-    this.img = this.imageCache[path];
-  }
-
-  /**
-   * Determines the appropriate image index based on the current health percentage.
-   * @returns {number} - The index of the image to be displayed.
-   */
-  resolveImageIndex() {
-    if (this.percentage == 100) {
-      return 5;
-    } else if (this.percentage >= 80) {
-      return 4;
-    } else if (this.percentage >= 60) {
-      return 3;
-    } else if (this.percentage >= 40) {
-      return 2;
-    } else if (this.percentage >= 20) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
 }

@@ -83,4 +83,36 @@ class DRAWABLE_OBJECT {
       ctx.stroke();
     }
   }
+
+    /**
+   * Determines the appropriate image index based on the current percentage.
+   * @returns {number} - The index of the image in the IMAGES array to be used.
+   */
+  resolveImageIndex() {
+    if (this.percentage == 100) {
+      return 5;
+    } else if (this.percentage >= 80) {
+      return 4;
+    } else if (this.percentage >= 60) {
+      return 3;
+    } else if (this.percentage >= 40) {
+      return 2;
+    } else if (this.percentage >= 20) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  
+  /**
+   * Sets the percentage and image of the coin bar based on the provided percentage.
+   * @param {number} percentage - The percentage to set for the coin bar.
+   */
+  setPercentage(percentage) {
+    this.percentage = percentage;
+    this.resolveImageIndex();
+    let path = this.IMAGES[this.resolveImageIndex()];
+    this.img = this.imageCache[path];
+  }
 }
