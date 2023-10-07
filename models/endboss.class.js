@@ -155,7 +155,7 @@ class Endboss extends MovableObject {
    */
   bossGotHit() {
     if (this.BossHealth > 0) {
-      this.BossHealth -= 25;
+      this.BossHealth -= 33;
       this.hit = true;
     } else {
       this.bossIsDead = true;

@@ -3,6 +3,11 @@
  * @extends MovableObject
  */
 class ThrowableObject extends MovableObject {
+
+    /**
+   * Array of image paths for the bottle Spin animation.
+   * @type {string[]}
+   */
   IMAGES_BOTTLE_SPIN = [
     "/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
     "/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
@@ -28,6 +33,9 @@ class ThrowableObject extends MovableObject {
     this.animate();
   }
 
+    /**
+   * Initiates the bottle's animations and movement.
+   */
   animate() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_SPIN);
