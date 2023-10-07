@@ -77,6 +77,14 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  IMAGES_WALKING = [
+    "img/4_enemie_boss_chicken/1_walk/G1.png",
+    "img/4_enemie_boss_chicken/1_walk/G2.png",
+    "img/4_enemie_boss_chicken/1_walk/G3.png",
+    "img/4_enemie_boss_chicken/1_walk/G4.png",
+
+  ]
+
   /**
    * Creates a new Endboss instance, sets its position, loads its images, and initializes animations.
    */
@@ -94,6 +102,11 @@ class Endboss extends MovableObject {
    * Initiates the animation sequence for the Endboss based on its state: hit, dead, or walking.
    */
   animate() {
+    setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 60);
+    this.moveLeft();
+
     setInterval(() => {
       if (this.hit && !this.bossIsDead) {
         this.playAnimation(this.IMAGES_HIT);
