@@ -1,34 +1,51 @@
 /**
- * Represents the main antagonist, the Endboss, in the game.
- *
- * The Endboss is a type of `MovableObject` with specific features such as health,
- * different animation states for walking, being hit, and dying.
- *
- * @class
+ * Represents the main antagonist of the game - the Endboss.
+ * The Endboss has different animation states: walking, hit, and dead.
+ * The player can reduce the Endboss's health by hitting him.
  * @extends MovableObject
- *
- * @property {number} height - The height of the Endboss. Defaults to 400.
- * @property {number} width - The width of the Endboss. Defaults to 250.
- * @property {number} y - The y-coordinate position of the Endboss. Defaults to 50.
- * @property {number} BossHealth - The health points of the Endboss. Defaults to 100.
- * @property {boolean} hit - Indicates if the Endboss is currently being hit. Defaults to false.
- * @property {boolean} bossIsDead - Indicates if the Endboss is dead. Defaults to false.
- * @property {Array<string>} IMAGES_WALKING - The array of image paths used for the walking animation.
- * @property {Array<string>} IMAGES_HIT - The array of image paths used for the hit animation.
- * @property {Array<string>} IMAGES_DEAD - The array of image paths used for the death animation.
- *
- * @method constructor - Creates a new instance of Endboss.
- * @method animate - Controls the animation logic for the Endboss based on its state.
- * @method bossGotHit - Handles the logic when the Endboss is hit by a projectile.
  */
 class Endboss extends MovableObject {
+  /**
+   * The height of the Endboss.
+   * @type {number}
+   */
   height = 400;
+
+  /**
+   * The width of the Endboss.
+   * @type {number}
+   */
   width = 250;
+
+  /**
+   * The y-coordinate of the Endboss.
+   * @type {number}
+   */
   y = 50;
+
+  /**
+   * The health points of the Endboss.
+   * When it reaches 0, the Endboss is considered dead.
+   * @type {number}
+   */
   BossHealth = 100;
+
+  /**
+   * Indicates if the Endboss has been hit.
+   * @type {boolean}
+   */
   hit = false;
+
+  /**
+   * Indicates if the Endboss is dead.
+   * @type {boolean}
+   */
   bossIsDead = false;
 
+  /**
+   * Images representing the walking state of the Endboss.
+   * @type {Array<string>}
+   */
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
     "img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -40,18 +57,29 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
+  /**
+   * Images representing the hit state of the Endboss.
+   * @type {Array<string>}
+   */
   IMAGES_HIT = [
     "img/4_enemie_boss_chicken/4_hurt/G21.png",
     "img/4_enemie_boss_chicken/4_hurt/G22.png",
     "img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
+  /**
+   * Images representing the dead state of the Endboss.
+   * @type {Array<string>}
+   */
   IMAGES_DEAD = [
     "img/4_enemie_boss_chicken/5_dead/G24.png",
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  /**
+   * Creates a new Endboss instance, sets its position, loads its images, and initializes animations.
+   */
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.currentImage = 0;
@@ -62,6 +90,9 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Initiates the animation sequence for the Endboss based on its state: hit, dead, or walking.
+   */
   animate() {
     setInterval(() => {
       if (this.hit && !this.bossIsDead) {
@@ -75,6 +106,10 @@ class Endboss extends MovableObject {
     }, 200);
   }
 
+  /**
+   * Handles the logic when the Endboss is hit by the player.
+   * Reduces the BossHealth and updates the state of the Endboss.
+   */
   bossGotHit() {
     if (this.BossHealth > 0) {
       this.BossHealth -= 25;

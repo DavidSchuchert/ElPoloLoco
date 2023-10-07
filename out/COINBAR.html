@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: DRAWABLE_OBJECT</title>
+    <title>JSDoc: Class: COINBAR</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: DRAWABLE_OBJECT</h1>
+    <h1 class="page-title">Class: COINBAR</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>DRAWABLE_OBJECT<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>COINBAR<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Represents a drawable object in the game with image-rendering capabilities.This class provides the ability to load, cache, and draw images onto a canvas context.It also has an optional bounding box drawing function which works for certain derived classes.</div>
+            <div class="class-description">Represents a coin bar status in the game, which shows the amount of coins collected or progress made.</div>
         
     
 </header>
@@ -45,12 +45,16 @@
     
 
     
-    <h4 class="name" id="DRAWABLE_OBJECT"><span class="type-signature"></span>new DRAWABLE_OBJECT<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="COINBAR"><span class="type-signature"></span>new COINBAR<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
 
 
+
+<div class="description">
+    Creates a new COINBAR instance, sets its position and initializes its image based on percentage.
+</div>
 
 
 
@@ -93,7 +97,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_drawable-object.class.js.html">models/drawable-object.class.js</a>, <a href="models_drawable-object.class.js.html#line6">line 6</a>
+        <a href="models_coin-bar.class.js.html">models/coin-bar.class.js</a>, <a href="models_coin-bar.class.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
@@ -127,6 +131,17 @@
     </div>
 
     
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li>
+    </ul>
+
+
+    
 
     
 
@@ -140,6 +155,78 @@
 
     
         <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="IMAGES"><span class="type-signature"></span>IMAGES<span class="type-signature"> :Array.&lt;string></span></h4>
+
+
+
+
+<div class="description">
+    The images representing various stages of the coin bar.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;string></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_coin-bar.class.js.html">models/coin-bar.class.js</a>, <a href="models_coin-bar.class.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
 
         
             
@@ -176,6 +263,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#height">DRAWABLE_OBJECT#height</a>
+    </li></ul></dd>
     
 
     
@@ -249,6 +341,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#imageCache">DRAWABLE_OBJECT#imageCache</a>
+    </li></ul></dd>
+    
 
     
 
@@ -270,6 +367,78 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="models_drawable-object.class.js.html">models/drawable-object.class.js</a>, <a href="models_drawable-object.class.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="percentage"><span class="type-signature"></span>percentage<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    The percentage representation of the coin bar.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_coin-bar.class.js.html">models/coin-bar.class.js</a>, <a href="models_coin-bar.class.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -320,6 +489,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#width">DRAWABLE_OBJECT#width</a>
+    </li></ul></dd>
     
 
     
@@ -393,6 +567,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#x">DRAWABLE_OBJECT#x</a>
+    </li></ul></dd>
+    
 
     
 
@@ -464,6 +643,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#y">DRAWABLE_OBJECT#y</a>
+    </li></ul></dd>
     
 
     
@@ -593,6 +777,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#draw">DRAWABLE_OBJECT#draw</a>
+    </li></ul></dd>
     
 
     
@@ -731,6 +920,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#drawFrame">DRAWABLE_OBJECT#drawFrame</a>
+    </li></ul></dd>
+    
 
     
 
@@ -867,6 +1061,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#loadImage">DRAWABLE_OBJECT#loadImage</a>
+    </li></ul></dd>
     
 
     
@@ -1005,6 +1204,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="DRAWABLE_OBJECT.html#loadImages">DRAWABLE_OBJECT#loadImages</a>
+    </li></ul></dd>
+    
 
     
 
@@ -1026,6 +1230,253 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="models_drawable-object.class.js.html">models/drawable-object.class.js</a>, <a href="models_drawable-object.class.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="resolveImageIndex"><span class="type-signature"></span>resolveImageIndex<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Determines the appropriate image index based on the current percentage.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_coin-bar.class.js.html">models/coin-bar.class.js</a>, <a href="models_coin-bar.class.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The index of the image in the IMAGES array to be used.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setPercentage"><span class="type-signature"></span>setPercentage<span class="signature">(percentage)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the percentage and image of the coin bar based on the provided percentage.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>percentage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The percentage to set for the coin bar.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_coin-bar.class.js.html">models/coin-bar.class.js</a>, <a href="models_coin-bar.class.js.html#line42">line 42</a>
     </li></ul></dd>
     
 

@@ -1,48 +1,47 @@
 /**
- * Manages collisions within the game world.
+ * Manages collisions within a game world.
  */
 class CollisionManager {
   /**
-   * Initializes a new instance of the CollisionManager.
-   * @param {World} world - The game world instance.
+   * Creates a new CollisionManager instance.
+   * @param {Object} world - The game world in which collisions occur.
    */
   constructor(world) {
     this.world = world;
+    this.tollerance_x = 100;
+    this.tollerance_y = 100;
   }
 
   /**
-   * Checks and handles various types of collisions within the game:
-   * - Collision between the character and enemies.
-   * - Collision between throwable bottles and the endboss.
-   * - Collision between the character and collectible bottles.
-   * - Collision between the character and collectible coins.
-   *
-   * When collisions are detected, this method will:
-   * - Remove killed enemies from the game.
-   * - Adjust health bars and status bars based on interactions.
-   * - Play or pause sound effects based on the state of the game.
-   * - Remove collected items from the game world and increment inventory counters.
-   * - End the game when certain conditions are met (e.g., character energy reaches zero).
+   * Checks and handles collisions between various game entities including character, enemies, bottles, coins, and endboss.
    */
   checkCollisions() {
     /* check for collision with enemy */
     this.world.level.enemies.forEach((enemy, index) => {
+      // First, check for jumping on the enemy
       if (
         this.world.character.isColliding(enemy) &&
-        this.world.character.speedY <= -10
+        this.world.character.y + this.world.character.height <=
+          enemy.y + this.tollerance_y &&
+        this.world.character.speedY <= -10 &&
+        this.world.character.x + this.world.character.width >=
+          enemy.x - this.tollerance_x &&
+        this.world.character.x <= enemy.x + enemy.width + this.tollerance_x
       ) {
         enemy.hit();
+        enemy.isHit = true;
         setTimeout(() => {
           let enemyIndex = this.world.level.enemies.indexOf(enemy);
           if (enemyIndex !== -1) {
             this.world.level.enemies.splice(enemyIndex, 1);
           }
+          enemy.isHit = false;
         }, 500);
-      }
-      if (this.world.character.isColliding(enemy) && enemy.isHit == false) {
+      } else if (this.world.character.isColliding(enemy) && !enemy.isHit) {
         this.world.character.hit();
         this.world.statusBar.setPercentage(this.world.character.energy);
       }
+
       if (this.world.character.energy == 0) {
         this.world.GameEnds();
       }
@@ -68,7 +67,9 @@ class CollisionManager {
       });
     });
 
-    /* Check for Collision with bottle */
+    /**
+     * Checks for throwable objects in the game world and manages their creation and lifecycle.
+     */
     this.world.level.bottles.forEach((bottle, index) => {
       if (this.world.character.isColliding(bottle)) {
         this.world.bottlesInInventory++;

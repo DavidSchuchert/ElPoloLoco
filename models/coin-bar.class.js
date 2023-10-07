@@ -1,28 +1,12 @@
 /**
- * Represents the coin status bar in the game's HUD (Heads-Up Display).
- *
- * The `COINBAR` class extends the `DRAWABLE_OBJECT` class and provides a visual representation
- * of the player's coin collection progress. The bar changes its image based on the percentage
- * of coins collected, offering the player a visual feedback on their collection status.
- *
- * @class
+ * Represents a coin bar status in the game, which shows the amount of coins collected or progress made.
  * @extends DRAWABLE_OBJECT
- *
- * @property {Array<string>} IMAGES - Array of image paths representing different coin collection statuses.
- * @property {number} percentage - Current percentage of coins collected by the player.
- *
- * @constructor
- * Initializes a new coin status bar, loads its images, sets its initial position,
- * dimensions, and percentage value. Upon instantiation, the visual representation of the bar
- * is set based on the initial percentage value.
- *
- * @method setPercentage
- * Sets the coin collection percentage and updates the bar's visual representation accordingly.
- *
- * @method resolveImageIndex
- * Determines which image from the IMAGES array should be displayed based on the current coin collection percentage.
  */
 class COINBAR extends DRAWABLE_OBJECT {
+  /**
+   * The images representing various stages of the coin bar.
+   * @type {Array<string>}
+   */
   IMAGES = [
     "img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",
     "img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png",
@@ -32,8 +16,15 @@ class COINBAR extends DRAWABLE_OBJECT {
     "img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png",
   ];
 
+  /**
+   * The percentage representation of the coin bar.
+   * @type {number}
+   */
   percentage = 0;
 
+  /**
+   * Creates a new COINBAR instance, sets its position and initializes its image based on percentage.
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES);
@@ -44,11 +35,20 @@ class COINBAR extends DRAWABLE_OBJECT {
     this.setPercentage(0);
   }
 
+  /**
+   * Sets the percentage and image of the coin bar based on the provided percentage.
+   * @param {number} percentage - The percentage to set for the coin bar.
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
+
+  /**
+   * Determines the appropriate image index based on the current percentage.
+   * @returns {number} - The index of the image in the IMAGES array to be used.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

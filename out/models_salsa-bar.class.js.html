@@ -27,23 +27,16 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Represents a visual status bar indicating the amount of salsa available.
- *
- * The `SALSABAR` class extends the `DRAWABLE_OBJECT` class and provides functionality to display
- * a bar that visually represents a percentage value by displaying appropriate image assets
- * based on the set percentage. This class can be used to give the player feedback on
- * how much salsa they have left in the game.
- *
- * @class
- * @extends DRAWABLE_OBJECT
- *
- * @property {string[]} IMAGES - Array of file paths to image assets representing different percentage states of the salsa bar.
- * @property {number} percentage - The current percentage value the salsa bar should display.
- *
- * @method setPercentage - Sets the percentage value and updates the displayed image based on the new percentage.
- * @method resolveImageIndex - Determines which image from the IMAGES array should be displayed based on the current percentage value.
+ * Represents the Salsa status bar in the game.
+ * This is an extension of the DRAWABLE_OBJECT class, which provides the game 
+ * with a visual representation of the salsa percentage, using different images.
  */
 class SALSABAR extends DRAWABLE_OBJECT {
+
+  /**
+   * Array of images that depict different percentage levels for the salsa bar.
+   * @type {Array&lt;string>}
+   */
   IMAGES = [
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
@@ -53,8 +46,15 @@ class SALSABAR extends DRAWABLE_OBJECT {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
   ];
 
+  /**
+   * Percentage value of the salsa in the bar.
+   * @type {number}
+   */
   percentage = 0;
 
+  /**
+   * Constructs a new SALSABAR object, initializes the image and sets its properties.
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES);
@@ -65,11 +65,20 @@ class SALSABAR extends DRAWABLE_OBJECT {
     this.setPercentage(0);
   }
 
+  /**
+   * Sets the percentage of the salsa bar and updates the display image accordingly.
+   * @param {number} percentage - The new percentage value to set.
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
+
+  /**
+   * Resolves the image index for the current percentage.
+   * @returns {number} - The index of the image in the IMAGES array that corresponds to the current percentage.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;
@@ -96,13 +105,13 @@ class SALSABAR extends DRAWABLE_OBJECT {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CollisionManager.html">CollisionManager</a></li><li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li><li><a href="Initializes%2520a%2520new%2520Keyboard%2520object%2520with%2520all%2520keys%2520set%2520to%2520an%2520unpressed%2520state%2520(false)..html">Initializes a new Keyboard object with all keys set to an unpressed state (false).</a></li><li><a href="Initializes%2520a%2520new%2520cloud%2520object,%2520sets%2520its%2520image,%2520and%2520randomizes%2520its%2520x-coordinate%250Dwithin%2520a%2520specific%2520range.%2520After%2520creation,%2520the%2520cloud%2520starts%2520its%2520animation_movement..html">Initializes a new cloud object, sets its image, and randomizes its x-coordinatewithin a specific range. After creation, the cloud starts its animation/movement.</a></li><li><a href="Initializes%2520a%2520new%2520coin%2520object,%2520sets%2520its%2520image%2520and%2520randomizes%2520its%2520x-coordinate%2520within%2520a%2520specific%2520range..html"> sets its image and randomizes its x-coordinate within a specific range.</a></li><li><a href="Level.html">Level</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addTouch">addTouch</a></li><li><a href="global.html#bossGotHit-HandlesthelogicwhentheEndbossishitbyaprojectile.">bossGotHit - Handles the logic when the Endboss is hit by a projectile.</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#constructor-CreatesanewinstanceofBackgroundObjectwiththespecifiedimage,x-coordinate,andadjuststhey-coordinatebasedontheobject'sheight.">constructor - Creates a new instance of BackgroundObject with the specified image, x-coordinate,                       and adjusts the y-coordinate based on the object's height.</a></li><li><a href="global.html#constructor-InitializesanewinstanceofBottles.Thex-coordinateisrandomizedwithinarange,whiletheimagepathforthebottleispredefined.">constructor - Initializes a new instance of Bottles. The x-coordinate                      is randomized within a range, while the image path for the                      bottle is predefined.</a></li><li><a href="global.html#hit-FunctiontohandletheeventwhentheChickenishit.">hit - Function to handle the event when the Chicken is hit.</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#jump-Makestheobjectjump.">jump - Makes the object jump.</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#level1">level1</a></li><li><a href="global.html#muteAllSounds">muteAllSounds</a></li><li><a href="global.html#playCharacterStatusAnimations-Choosestherightanimationbasedonthecharacter'sstatus.">playCharacterStatusAnimations - Chooses the right animation based on the character's status.</a></li><li><a href="global.html#resolveImageIndexDetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentcoincollectionpercentage.">resolveImageIndexDetermines which image from the IMAGES array should be displayed based on the current coin collection percentage.</a></li><li><a href="global.html#resolveImageIndexResolvestheindexoftheimageintheIMAGESarraybasedonthecurrentpercentage.">resolveImageIndexResolves the index of the image in the IMAGES array based on the current percentage.</a></li><li><a href="global.html#resolveImageIndex-Determinestheappropriateimageindexbasedonthecurrenthealthpercentage.">resolveImageIndex - Determines the appropriate image index based on the current health percentage.</a></li><li><a href="global.html#resolveImageIndex-DetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentpercentagevalue.">resolveImageIndex - Determines which image from the IMAGES array should be displayed based on the current percentage value.</a></li><li><a href="global.html#startButton">startButton</a></li><li><a href="global.html#throw-SetsthespeedYandgravityfortheThrowableObjectandupdatesitsxpositionovertime.">throw - Sets the speedY and gravity for the ThrowableObject and updates its x position over time.</a></li><li><a href="global.html#unmuteAllSounds">unmuteAllSounds</a></li><li><a href="global.html#world">world</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BOSSHEALTHBAR.html">BOSSHEALTHBAR</a></li><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottles.html">Bottles</a></li><li><a href="COINBAR.html">COINBAR</a></li><li><a href="Character.html">Character</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coins.html">Coins</a></li><li><a href="CollisionManager.html">CollisionManager</a></li><li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="SALSABAR.html">SALSABAR</a></li><li><a href="STATUSBAR.html">STATUSBAR</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addTouch">addTouch</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#level1">level1</a></li><li><a href="global.html#muteAllSounds">muteAllSounds</a></li><li><a href="global.html#startButton">startButton</a></li><li><a href="global.html#unmuteAllSounds">unmuteAllSounds</a></li><li><a href="global.html#world">world</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 06 2023 11:12:38 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Oct 07 2023 11:38:43 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

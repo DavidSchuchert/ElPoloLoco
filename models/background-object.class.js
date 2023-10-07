@@ -1,28 +1,31 @@
 /**
- * Represents the visual objects in the game's background.
- * 
- * The `BackgroundObject` class is a subclass of `MovableObject` that is used to represent 
- * various non-interactive elements in the game's backdrop. These objects can be 
- * elements such as clouds, trees, buildings, etc. They are typically static but can 
- * be movable if required by the game dynamics.
- * 
- * @class
+ * Represents a background object in the game, which is a type of movable object.
  * @extends MovableObject
- * 
- * @property {number} width - The width of the background object. Defaults to 720.
- * @property {number} height - The height of the background object. Defaults to 480.
- * 
- * @method constructor - Creates a new instance of BackgroundObject with the specified image, x-coordinate, 
- *                       and adjusts the y-coordinate based on the object's height.
  */
 class BackgroundObject extends MovableObject {
 
-width = 720;
-height =  480;
+  /** 
+   * The width of the background object.
+   * @type {number} 
+   */
+  width = 720;
 
+  /** 
+   * The height of the background object.
+   * @type {number} 
+   */
+  height = 480;
+
+  /**
+   * Creates a new BackgroundObject instance.
+   * @param {string} imagePath - The path to the image resource for the background object.
+   * @param {number} x - The initial x-coordinate of the object.
+   * @param {number} y - The initial y-coordinate of the object. (This parameter seems unused in the provided constructor, but is included in the documentation for clarity.)
+   */
   constructor(imagePath, x, y) {
     super().loadImage(imagePath);
-    this.y = 480 - this.height; // 480 - 400
+    this.y = 480 - this.height; 
     this.x = x;
   }
 }
+

@@ -1,27 +1,43 @@
 /**
- * Represents the current state of keyboard inputs.
- *
- * The `Keyboard` class provides a simple way to track the state of specific keys.
- * Each key has a boolean value representing whether it's currently pressed (true)
- * or not pressed (false).
- *
- * @class
- *
- * @property {boolean} LEFT - Represents the state of the LEFT arrow key.
- * @property {boolean} RIGHT - Represents the state of the RIGHT arrow key.
- * @property {boolean} UP - Represents the state of the UP arrow key.
- * @property {boolean} DOWN - Represents the state of the DOWN arrow key.
- * @property {boolean} SPACE - Represents the state of the SPACE key.
- * @property {boolean} D - Represents the state of the D key.
- *
- * @constructor
- * Initializes a new Keyboard object with all keys set to an unpressed state (false).
+ * Represents the state of keyboard controls in the game.
+ * This class keeps track of specific key presses and releases.
  */
 class Keyboard {
+
+  /**
+   * Indicates if the LEFT arrow key is pressed.
+   * @type {boolean}
+   */
   LEFT = false;
+
+  /**
+   * Indicates if the RIGHT arrow key is pressed.
+   * @type {boolean}
+   */
   RIGHT = false;
+
+  /**
+   * Indicates if the UP arrow key is pressed.
+   * @type {boolean}
+   */
   UP = false;
+
+  /**
+   * Indicates if the DOWN arrow key is pressed.
+   * @type {boolean}
+   */
   DOWN = false;
+
+  /**
+   * Indicates if the SPACE bar key is pressed.
+   * @type {boolean}
+   */
   SPACE = false;
+
+  /**
+   * Indicates if the 'D' key is pressed.
+   * @type {boolean}
+   */
   D = false;
+
 }

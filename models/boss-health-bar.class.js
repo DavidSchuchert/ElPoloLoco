@@ -1,20 +1,12 @@
 /**
- * Represents the health bar of the main antagonist, the Endboss.
- * 
- * The `BOSSHEALTHBAR` is a type of `DRAWABLE_OBJECT` that visually represents the health 
- * status of the Endboss using various images to show the health percentage.
- * 
- * @class
+ * Represents the health bar for the boss in the game, which is a type of drawable object.
  * @extends DRAWABLE_OBJECT
- * 
- * @property {Array<string>} IMAGES - The array of image paths used to represent different health percentages.
- * @property {number} percentage - The current health percentage of the Endboss. Defaults to 100.
- * 
- * @method constructor - Creates a new instance of BOSSHEALTHBAR with default settings.
- * @method setPercentage - Updates the health percentage and changes the display image accordingly.
- * @method resolveImageIndex - Determines the appropriate image index based on the current health percentage.
  */
 class BOSSHEALTHBAR extends DRAWABLE_OBJECT {
+  /**
+   * An array of image paths representing different health states of the boss.
+   * @type {string[]}
+   */
   IMAGES = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/orange/20.png",
@@ -22,11 +14,17 @@ class BOSSHEALTHBAR extends DRAWABLE_OBJECT {
     "img/7_statusbars/1_statusbar/2_statusbar_health/orange/60.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/orange/80.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/orange/100.png",
-
   ];
 
+/** 
+ * Represents the current percentage of the boss's health.
+ * @type {number}
+ */
   percentage = 100;
 
+  /**
+   * Creates a new BOSSHEALTHBAR instance.
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES);
@@ -37,12 +35,20 @@ class BOSSHEALTHBAR extends DRAWABLE_OBJECT {
     this.setPercentage(100);
   }
 
+  /**
+   * Sets the health percentage for the boss and updates the displayed image accordingly.
+   * @param {number} percentage - The new health percentage for the boss.
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
-
   }
+
+  /**
+   * Determines the appropriate image index based on the current health percentage.
+   * @returns {number} - The index of the image to be displayed.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

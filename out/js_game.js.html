@@ -147,7 +147,6 @@ document.addEventListener("keydown", (e) => {
     keyboard.SPACE = true;
   }
 
-  console.log(e);
 });
 
 /**
@@ -178,8 +177,6 @@ document.addEventListener("keyup", (e) => {
   if (e.keyCode == 32) {
     keyboard.SPACE = false;
   }
-
-  console.log(e);
 });
 
 
@@ -195,13 +192,13 @@ document.addEventListener("keyup", (e) => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CollisionManager.html">CollisionManager</a></li><li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li><li><a href="Initializes%2520a%2520new%2520Keyboard%2520object%2520with%2520all%2520keys%2520set%2520to%2520an%2520unpressed%2520state%2520(false)..html">Initializes a new Keyboard object with all keys set to an unpressed state (false).</a></li><li><a href="Initializes%2520a%2520new%2520cloud%2520object,%2520sets%2520its%2520image,%2520and%2520randomizes%2520its%2520x-coordinate%250Dwithin%2520a%2520specific%2520range.%2520After%2520creation,%2520the%2520cloud%2520starts%2520its%2520animation_movement..html">Initializes a new cloud object, sets its image, and randomizes its x-coordinatewithin a specific range. After creation, the cloud starts its animation/movement.</a></li><li><a href="Initializes%2520a%2520new%2520coin%2520object,%2520sets%2520its%2520image%2520and%2520randomizes%2520its%2520x-coordinate%2520within%2520a%2520specific%2520range..html"> sets its image and randomizes its x-coordinate within a specific range.</a></li><li><a href="Level.html">Level</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addTouch">addTouch</a></li><li><a href="global.html#bossGotHit-HandlesthelogicwhentheEndbossishitbyaprojectile.">bossGotHit - Handles the logic when the Endboss is hit by a projectile.</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#constructor-CreatesanewinstanceofBackgroundObjectwiththespecifiedimage,x-coordinate,andadjuststhey-coordinatebasedontheobject'sheight.">constructor - Creates a new instance of BackgroundObject with the specified image, x-coordinate,                       and adjusts the y-coordinate based on the object's height.</a></li><li><a href="global.html#constructor-InitializesanewinstanceofBottles.Thex-coordinateisrandomizedwithinarange,whiletheimagepathforthebottleispredefined.">constructor - Initializes a new instance of Bottles. The x-coordinate                      is randomized within a range, while the image path for the                      bottle is predefined.</a></li><li><a href="global.html#hit-FunctiontohandletheeventwhentheChickenishit.">hit - Function to handle the event when the Chicken is hit.</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#jump-Makestheobjectjump.">jump - Makes the object jump.</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#level1">level1</a></li><li><a href="global.html#muteAllSounds">muteAllSounds</a></li><li><a href="global.html#playCharacterStatusAnimations-Choosestherightanimationbasedonthecharacter'sstatus.">playCharacterStatusAnimations - Chooses the right animation based on the character's status.</a></li><li><a href="global.html#resolveImageIndexDetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentcoincollectionpercentage.">resolveImageIndexDetermines which image from the IMAGES array should be displayed based on the current coin collection percentage.</a></li><li><a href="global.html#resolveImageIndexResolvestheindexoftheimageintheIMAGESarraybasedonthecurrentpercentage.">resolveImageIndexResolves the index of the image in the IMAGES array based on the current percentage.</a></li><li><a href="global.html#resolveImageIndex-Determinestheappropriateimageindexbasedonthecurrenthealthpercentage.">resolveImageIndex - Determines the appropriate image index based on the current health percentage.</a></li><li><a href="global.html#resolveImageIndex-DetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentpercentagevalue.">resolveImageIndex - Determines which image from the IMAGES array should be displayed based on the current percentage value.</a></li><li><a href="global.html#startButton">startButton</a></li><li><a href="global.html#throw-SetsthespeedYandgravityfortheThrowableObjectandupdatesitsxpositionovertime.">throw - Sets the speedY and gravity for the ThrowableObject and updates its x position over time.</a></li><li><a href="global.html#unmuteAllSounds">unmuteAllSounds</a></li><li><a href="global.html#world">world</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BOSSHEALTHBAR.html">BOSSHEALTHBAR</a></li><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottles.html">Bottles</a></li><li><a href="COINBAR.html">COINBAR</a></li><li><a href="Character.html">Character</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coins.html">Coins</a></li><li><a href="CollisionManager.html">CollisionManager</a></li><li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="SALSABAR.html">SALSABAR</a></li><li><a href="STATUSBAR.html">STATUSBAR</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addTouch">addTouch</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#level1">level1</a></li><li><a href="global.html#muteAllSounds">muteAllSounds</a></li><li><a href="global.html#startButton">startButton</a></li><li><a href="global.html#unmuteAllSounds">unmuteAllSounds</a></li><li><a href="global.html#world">world</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 06 2023 11:12:38 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Oct 07 2023 11:38:43 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,46 +1,30 @@
 /**
- * Represents the main character in the game.
- * 
- * The `Character` class is an extension of the `MovableObject` class. It provides functionality 
- * specific to the main character, such as walking, jumping, animations for different statuses, and 
- * responding to keyboard inputs. The character has different states represented by different animations, 
- * such as walking, jumping, being hurt, being idle, or being dead.
- * 
- * @class
- * 
+ * Represents the main character in the game, which is a type of movable object.
  * @extends MovableObject
- * 
- * @property {Array<string>} IMAGES_WALKING - Array of image paths for the walking animation.
- * @property {Array<string>} IMAGES_JUMPING - Array of image paths for the jumping animation.
- * @property {Array<string>} IMAGES_DEAD - Array of image paths for the death animation.
- * @property {Array<string>} IMAGES_HURT - Array of image paths for the hurt animation.
- * @property {Array<string>} IMAGES_IDLE - Array of image paths for the idle animation.
- * @property {number} currentImage - Index of the current image being displayed.
- * @property {Object} world - Reference to the world in which the character exists.
- * @property {Audio} walking_sound - Audio object for the walking sound.
- * @property {Audio} jump_sound - Audio object for the jumping sound.
- * @property {number} animationInterval - Interval for the character's animations.
- * 
- * @constructor 
- * Initializes a new Character object with default parameters, loads relevant images, and starts animations.
- * 
- * @method animate
- * Starts the main animation loop for the character.
- * 
- * @method setAnimationInterval
- * Sets the interval rate for the character's animations.
- * @param {number} rate - The interval rate in milliseconds.
- * 
- * @method moveCharacter
- * Moves the character based on keyboard inputs.
- * 
- * @method playCharacterStatusAnimations
- * Plays the relevant animation based on the character's status.
  */
 class Character extends MovableObject {
+  /**
+   * The height of the character.
+   * @type {number}
+   */
   height = 280;
+
+  /**
+   * The y-coordinate of the character.
+   * @type {number}
+   */
   y = 135;
+
+  /**
+   * The speed at which the character moves.
+   * @type {number}
+   */
   speed = 10;
+
+  /**
+   * Array of image paths for the character's walking animation.
+   * @type {string[]}
+   */
   IMAGES_WALKING = [
     "../img/2_character_pepe/2_walk/W-21.png",
     "../img/2_character_pepe/2_walk/W-22.png",
@@ -49,6 +33,11 @@ class Character extends MovableObject {
     "../img/2_character_pepe/2_walk/W-25.png",
     "../img/2_character_pepe/2_walk/W-26.png",
   ];
+
+  /**
+   * Array of image paths for the character's jumping animation.
+   * @type {string[]}
+   */
   IMAGES_JUMPING = [
     "img/2_character_pepe/3_jump/J-31.png",
     "img/2_character_pepe/3_jump/J-32.png",
@@ -61,6 +50,10 @@ class Character extends MovableObject {
     "img/2_character_pepe/3_jump/J-39.png",
   ];
 
+  /**
+   * Array of image paths for the character's death animation.
+   * @type {string[]}
+   */
   IMAGES_DEAD = [
     "img/2_character_pepe/5_dead/D-51.png",
     "img/2_character_pepe/5_dead/D-52.png",
@@ -71,11 +64,20 @@ class Character extends MovableObject {
     "img/2_character_pepe/5_dead/D-57.png",
   ];
 
+  /**
+   * Array of image paths for the character's hurt animation.
+   * @type {string[]}
+   */
   IMAGES_HURT = [
     "img/2_character_pepe/4_hurt/H-41.png",
     "img/2_character_pepe/4_hurt/H-42.png",
     "img/2_character_pepe/4_hurt/H-43.png",
   ];
+
+  /**
+   * Array of image paths for the character's idle animation.
+   * @type {string[]}
+   */
   IMAGES_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
     "img/2_character_pepe/1_idle/idle/I-2.png",
@@ -89,12 +91,38 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/idle/I-10.png",
   ];
 
+  /**
+   * The current image being displayed in the character's animation.
+   * @type {number}
+   */
   currentImage = 0;
+
+  /**
+   * Reference to the game world.
+   */
   world;
+
+  /**
+   * Audio for the character's walking sound.
+   * @type {Audio}
+   */
   walking_sound = new Audio("audio/walk.mp3");
+
+  /**
+   * Audio for the character's jump sound.
+   * @type {Audio}
+   */
   jump_sound = new Audio("/audio/jump.mp3");
+
+  /**
+   * The interval at which the character's animation is updated.
+   * @type {number}
+   */
   animationInterval = null;
 
+  /**
+   * Creates a new Character instance and initializes its animations and behavior.
+   */
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -106,24 +134,34 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Initiates the character's animations and movement.
+   */
   animate() {
     setInterval(() => {
       this.moveCharacter();
     }, 1000 / 60);
-  
+
     this.setAnimationInterval(50);
   }
-  
+
+  /**
+   * Sets the rate at which the character's animation updates.
+   * @param {number} rate - The time interval in milliseconds.
+   */
   setAnimationInterval(rate) {
     if (this.animationInterval) {
       clearInterval(this.animationInterval);
     }
-    
+
     this.animationInterval = setInterval(() => {
       this.playCharacterStatusAnimations();
     }, rate);
   }
 
+  /**
+   * Updates the character's position based on user input.
+   */
   moveCharacter() {
     this.walking_sound.pause();
 
@@ -152,6 +190,9 @@ class Character extends MovableObject {
     this.world.camera_x = -this.x + 100;
   }
 
+  /**
+   * Updates the character's animation based on its current status.
+   */
   playCharacterStatusAnimations() {
     if (this.isDead()) {
       this.setAnimationInterval(50);
@@ -160,7 +201,7 @@ class Character extends MovableObject {
       this.setAnimationInterval(50);
       this.playAnimation(this.IMAGES_HURT);
     } else if (this.isAboveGround()) {
-      this.setAnimationInterval(100); 
+      this.setAnimationInterval(100);
       this.playAnimation(this.IMAGES_JUMPING);
     } else {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {

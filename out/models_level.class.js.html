@@ -27,49 +27,72 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Represents a game level with all its entities and elements.
- * 
- * The `Level` class encapsulates all components that make up a game level, 
- * such as enemies, endboss, collectibles (bottles and coins), clouds, and other background objects. 
- * It also defines the end point of the level through the `level_end_x` property.
- * 
- * @class
- * 
- * @property {Array} enemies - List of all enemies present in the level.
- * @property {Object} endboss - The main antagonist or challenge at the end of the level.
- * @property {Array} bottles - List of all bottle collectibles in the level.
- * @property {Array} coins - List of all coin collectibles in the level.
- * @property {Array} clouds - List of all cloud elements in the level background.
- * @property {Array} backgroundObjects - List of all other miscellaneous objects that are part of the level's background.
- * @property {number} level_end_x - The x-coordinate defining the endpoint of the level.
- * 
- * @constructor 
- * @param {Array} enemies - List of all enemies.
- * @param {Object} endboss - The endboss of the level.
- * @param {Array} bottles - List of bottles.
- * @param {Array} coins - List of coins.
- * @param {Array} clouds - List of clouds.
- * @param {Array} backgroundObjects - List of background objects.
- * Initializes a new Level object with the provided parameters.
+ * Represents a game level.
+ * This class holds all the elements that construct a particular level, 
+ * such as enemies, endboss, coins, clouds, and other background objects.
  */
-class Level{
-enemies;
-endboss;
-clouds;
-bottles;
-coins;
-backgroundObjects;
-level_end_x = 2200;
+class Level {
 
-constructor(enemies, endboss, bottles, coins, clouds, backgroundObjects){
-    this.enemies = enemies;
-    this.endboss = endboss;
-    this.coins = coins;
-    this.bottles = bottles;
-    this.clouds = clouds;
-    this.backgroundObjects = backgroundObjects;
-}
-}</code></pre>
+    /**
+     * List of enemies present in the level.
+     * @type {Array}
+     */
+    enemies;
+  
+    /**
+     * The endboss character of the level.
+     */
+    endboss;
+  
+    /**
+     * List of clouds in the level's background.
+     * @type {Array}
+     */
+    clouds;
+  
+    /**
+     * List of bottles present in the level.
+     * @type {Array}
+     */
+    bottles;
+  
+    /**
+     * List of coins that can be collected in the level.
+     * @type {Array}
+     */
+    coins;
+  
+    /**
+     * Miscellaneous background objects present in the level.
+     * @type {Array}
+     */
+    backgroundObjects;
+  
+    /**
+     * X-axis position indicating the end of the level.
+     * @type {number}
+     */
+    level_end_x = 2200;
+  
+    /**
+     * Creates a new game level.
+     * @param {Array} enemies - List of enemies in the level.
+     * @param {Object} endboss - The endboss character of the level.
+     * @param {Array} bottles - List of bottles in the level.
+     * @param {Array} coins - List of collectible coins in the level.
+     * @param {Array} clouds - List of clouds in the level's background.
+     * @param {Array} backgroundObjects - List of other background objects.
+     */
+    constructor(enemies, endboss, bottles, coins, clouds, backgroundObjects) {
+      this.enemies = enemies;
+      this.endboss = endboss;
+      this.coins = coins;
+      this.bottles = bottles;
+      this.clouds = clouds;
+      this.backgroundObjects = backgroundObjects;
+    }
+  }
+  </code></pre>
         </article>
     </section>
 
@@ -79,13 +102,13 @@ constructor(enemies, endboss, bottles, coins, clouds, backgroundObjects){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CollisionManager.html">CollisionManager</a></li><li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li><li><a href="Initializes%2520a%2520new%2520Keyboard%2520object%2520with%2520all%2520keys%2520set%2520to%2520an%2520unpressed%2520state%2520(false)..html">Initializes a new Keyboard object with all keys set to an unpressed state (false).</a></li><li><a href="Initializes%2520a%2520new%2520cloud%2520object,%2520sets%2520its%2520image,%2520and%2520randomizes%2520its%2520x-coordinate%250Dwithin%2520a%2520specific%2520range.%2520After%2520creation,%2520the%2520cloud%2520starts%2520its%2520animation_movement..html">Initializes a new cloud object, sets its image, and randomizes its x-coordinatewithin a specific range. After creation, the cloud starts its animation/movement.</a></li><li><a href="Initializes%2520a%2520new%2520coin%2520object,%2520sets%2520its%2520image%2520and%2520randomizes%2520its%2520x-coordinate%2520within%2520a%2520specific%2520range..html"> sets its image and randomizes its x-coordinate within a specific range.</a></li><li><a href="Level.html">Level</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addTouch">addTouch</a></li><li><a href="global.html#bossGotHit-HandlesthelogicwhentheEndbossishitbyaprojectile.">bossGotHit - Handles the logic when the Endboss is hit by a projectile.</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#constructor-CreatesanewinstanceofBackgroundObjectwiththespecifiedimage,x-coordinate,andadjuststhey-coordinatebasedontheobject'sheight.">constructor - Creates a new instance of BackgroundObject with the specified image, x-coordinate,                       and adjusts the y-coordinate based on the object's height.</a></li><li><a href="global.html#constructor-InitializesanewinstanceofBottles.Thex-coordinateisrandomizedwithinarange,whiletheimagepathforthebottleispredefined.">constructor - Initializes a new instance of Bottles. The x-coordinate                      is randomized within a range, while the image path for the                      bottle is predefined.</a></li><li><a href="global.html#hit-FunctiontohandletheeventwhentheChickenishit.">hit - Function to handle the event when the Chicken is hit.</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#jump-Makestheobjectjump.">jump - Makes the object jump.</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#level1">level1</a></li><li><a href="global.html#muteAllSounds">muteAllSounds</a></li><li><a href="global.html#playCharacterStatusAnimations-Choosestherightanimationbasedonthecharacter'sstatus.">playCharacterStatusAnimations - Chooses the right animation based on the character's status.</a></li><li><a href="global.html#resolveImageIndexDetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentcoincollectionpercentage.">resolveImageIndexDetermines which image from the IMAGES array should be displayed based on the current coin collection percentage.</a></li><li><a href="global.html#resolveImageIndexResolvestheindexoftheimageintheIMAGESarraybasedonthecurrentpercentage.">resolveImageIndexResolves the index of the image in the IMAGES array based on the current percentage.</a></li><li><a href="global.html#resolveImageIndex-Determinestheappropriateimageindexbasedonthecurrenthealthpercentage.">resolveImageIndex - Determines the appropriate image index based on the current health percentage.</a></li><li><a href="global.html#resolveImageIndex-DetermineswhichimagefromtheIMAGESarrayshouldbedisplayedbasedonthecurrentpercentagevalue.">resolveImageIndex - Determines which image from the IMAGES array should be displayed based on the current percentage value.</a></li><li><a href="global.html#startButton">startButton</a></li><li><a href="global.html#throw-SetsthespeedYandgravityfortheThrowableObjectandupdatesitsxpositionovertime.">throw - Sets the speedY and gravity for the ThrowableObject and updates its x position over time.</a></li><li><a href="global.html#unmuteAllSounds">unmuteAllSounds</a></li><li><a href="global.html#world">world</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BOSSHEALTHBAR.html">BOSSHEALTHBAR</a></li><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottles.html">Bottles</a></li><li><a href="COINBAR.html">COINBAR</a></li><li><a href="Character.html">Character</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coins.html">Coins</a></li><li><a href="CollisionManager.html">CollisionManager</a></li><li><a href="DRAWABLE_OBJECT.html">DRAWABLE_OBJECT</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="SALSABAR.html">SALSABAR</a></li><li><a href="STATUSBAR.html">STATUSBAR</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addTouch">addTouch</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#level1">level1</a></li><li><a href="global.html#muteAllSounds">muteAllSounds</a></li><li><a href="global.html#startButton">startButton</a></li><li><a href="global.html#unmuteAllSounds">unmuteAllSounds</a></li><li><a href="global.html#world">world</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 06 2023 11:12:38 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Oct 07 2023 11:38:43 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>
