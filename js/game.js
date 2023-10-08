@@ -27,6 +27,7 @@ let isSoundMuted = localStorage.getItem("soundMuted") === "true";
 
 
 
+
 /**
  * Initializes the game by hiding the start screen and displaying the game canvas.
  */
@@ -124,7 +125,7 @@ document.addEventListener("keydown", (e) => {
     keyboard.RIGHT = true;
   }
   if (e.keyCode == 68) {
-    keyboard.D = true;
+      keyboard.D = true;
   }
   if (e.keyCode == 37) {
     keyboard.LEFT = true;

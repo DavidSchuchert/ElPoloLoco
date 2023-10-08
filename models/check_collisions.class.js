@@ -115,7 +115,7 @@ class CollisionManager {
    * Checks for throwable objects and handles their creation and management.
    */
   checkThrowObjects() {
-    if (this.world.keyboard.D && this.world.bottlesInInventory >= 1) {
+    if (this.world.keyboard.D && !this.world.D_Pressed && this.world.bottlesInInventory >= 1) {
       let bottle = new ThrowableObject(
         this.world.character.x + 100,
         this.world.character.y + 100
@@ -123,6 +123,9 @@ class CollisionManager {
       this.world.throwableObjects.push(bottle);
       this.world.bottlesInInventory--;
       this.world.salsaBar.setPercentage(this.world.bottlesInInventory * 20);
+      this.world.D_Pressed = true; 
+    } else if (!this.world.keyboard.D) {
+      this.world.D_Pressed = false; 
     }
   }
 }

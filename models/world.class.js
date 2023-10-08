@@ -20,6 +20,7 @@ class World {
   bg_music = new Audio("audio/bg_music.mp3");
   bottle_smash_sound = new Audio("audio/bottlesmash.mp3");
   StopSounds = false;
+  D_Pressed = false;
 
   /**
    * Initializes a new instance of the World.
