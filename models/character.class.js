@@ -254,21 +254,12 @@ class Character extends MovableObject {
     } else if (this.isAboveGround()) {
       this.setAnimationInterval(100);
       this.playAnimation(this.IMAGES_JUMPING);
+    } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      this.setAnimationInterval(50);
+      this.playAnimation(this.IMAGES_WALKING);
     } else {
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.setAnimationInterval(50);
-        this.playAnimation(this.IMAGES_WALKING);
-      }
-    }
-    if (
-      !this.world.keyboard.RIGHT &&
-      !this.world.keyboard.LEFT &&
-      !this.isAboveGround() &&
-      !this.isHurt() &&
-      !this.isDead()
-    ) {
       this.setAnimationInterval(50);
       this.playAnimation(this.IMAGES_IDLE);
     }
-  }
+}
 }
