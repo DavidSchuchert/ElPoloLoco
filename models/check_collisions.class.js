@@ -64,6 +64,7 @@ class CollisionManager {
     this.world.throwableObjects.forEach((throwableBottle, index) => {
       this.world.level.endboss.forEach((boss) => {
         if (boss.isColliding(throwableBottle)) {
+          throwableBottle.splash();
           boss.bossGotHit();
           this.world.bossHealthBar.setPercentage(boss.BossHealth);
           if (!this.world.StopSounds) {
@@ -71,8 +72,6 @@ class CollisionManager {
           } else {
             this.world.bottle_smash_sound.pause();
           }
-
-          this.world.throwableObjects.splice(index, 1);
         }
         if (boss.bossIsDead) {
           this.world.GameEnds();
@@ -118,7 +117,8 @@ class CollisionManager {
     if (this.world.keyboard.D && !this.world.D_Pressed && this.world.bottlesInInventory >= 1) {
       let bottle = new ThrowableObject(
         this.world.character.x + 100,
-        this.world.character.y + 100
+        this.world.character.y + 100,
+        this.world
       );
       this.world.throwableObjects.push(bottle);
       this.world.bottlesInInventory--;
