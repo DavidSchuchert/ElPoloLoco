@@ -163,31 +163,82 @@ class Character extends MovableObject {
    * Updates the character's position based on user input.
    */
   moveCharacter() {
-    this.walking_sound.pause();
+    this.handleWalkingSound();
 
-    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      this.moveRight();
-      if (!world.StopSounds) {
-        this.walking_sound.play();
-      } else {
-        this.walking_sound.pause();
-      }
+    if (this.world.keyboard.RIGHT) {
+      this.moveRightHandler();
     }
 
-    if (this.world.keyboard.LEFT && this.x > 0) {
+    if (this.world.keyboard.LEFT) {
+      this.moveLeftHandler();
+    }
+
+    if (this.world.keyboard.SPACE) {
+      this.jumpHandler();
+    }
+
+    this.world.camera_x = -this.x + 100;
+  }
+
+  /**
+   * Handle character movement to the right.
+   */
+  moveRightHandler() {
+    if (this.x < this.world.level.level_end_x) {
+      this.moveRight();
+      this.playWalkingSound();
+    }
+  }
+
+  /**
+   * Handle character movement to the left.
+   */
+  moveLeftHandler() {
+    if (this.x > 0) {
       this.moveLeft();
       this.otherDirection = true;
     }
+  }
 
-    if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+  /**
+   * Handle character jump.
+   */
+  jumpHandler() {
+    if (!this.isAboveGround()) {
       this.jump();
-      if (!world.StopSounds) {
-        this.jump_sound.play();
-      } else {
-        this.jump_sound.pause();
-      }
+      this.playJumpSound();
     }
-    this.world.camera_x = -this.x + 100;
+  }
+
+  /**
+   * Play walking sound based on sound settings.
+   */
+  handleWalkingSound() {
+    this.walking_sound.pause();
+
+    if ((this.world.keyboard.RIGHT || this.world.keyboard.LEFT) && !world.StopSounds) {
+      this.walking_sound.play();
+    }
+  }
+
+  /**
+   * Play jump sound based on sound settings.
+   */
+  playJumpSound() {
+    if (!world.StopSounds) {
+      this.jump_sound.play();
+    } else {
+      this.jump_sound.pause();
+    }
+  }
+
+  /**
+   * Play walking sound.
+   */
+  playWalkingSound() {
+    if (!world.StopSounds) {
+      this.walking_sound.play();
+    }
   }
 
   /**
